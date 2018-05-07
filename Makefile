@@ -12,23 +12,39 @@ SRC_SERVER	=	src/common/is_positive_integer.c	\
 				src/server/create_server.c			\
 				src/server/main.c
 
+SRC_CLIENT	=	src/common/is_positive_integer.c	\
+				src/common/poll_cond.c				\
+				src/common/poll_interact.c			\
+				src/common/poll_wait.c				\
+				src/client/main.c
+
 OBJ_SERVER	=	$(SRC_SERVER:.c=.o)
+
+OBJ_CLIENT	=	$(SRC_CLIENT:.c=.o)
 
 NAME_SERVER	=	server
 
-CFLAGS	=	-Iinclude
+NAME_CLIENT	=	client
 
-all:	$(NAME_SERVER)
+CFLAGS		=	-Iinclude
+
+
+all:			$(NAME_SERVER) $(NAME_CLIENT)
 
 $(NAME_SERVER):	$(OBJ_SERVER)
-			gcc -o $(NAME_SERVER) $(OBJ_SERVER)
+				gcc -o $(NAME_SERVER) $(OBJ_SERVER)
+
+$(NAME_CLIENT):	$(OBJ_CLIENT)
+				gcc -o $(NAME_CLIENT) $(OBJ_CLIENT)
 
 clean:
-			rm -rf $(OBJ_SERVER)
+				rm -rf $(OBJ_SERVER)
+				rm -rf $(OBJ_CLIENT)
 
-fclean: clean
-		rm -rf $(NAME_SERVER)
+fclean: 		clean
+				rm -rf $(NAME_SERVER)
+				rm -rf $(NAME_CLIENT)
 
-re:		fclean all
+re:				fclean all
 
-.PHONY:	all clean fclean re
+.PHONY:			all clean fclean re
