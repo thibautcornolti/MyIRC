@@ -8,6 +8,8 @@
 #ifndef PROJECT_COMMON_H
 	#define PROJECT_COMMON_H
 
+	#include <poll.h>
+
 typedef struct poll_s
 {
 	int fd;

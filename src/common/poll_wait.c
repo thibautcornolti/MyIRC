@@ -13,7 +13,7 @@ static size_t size_list(poll_t *p)
 {
 	size_t ret = 0;
 
-	while (p && p->next) {
+	while (p) {
 		ret += 1;
 		p = p->next;
 	}
