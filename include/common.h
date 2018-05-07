@@ -5,13 +5,15 @@
 ** common.h
 */
 
-#ifndef PROJECT_COMMON_H
-	#define PROJECT_COMMON_H
+#pragma once
 
-	#include <poll.h>
+#include <poll.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
-typedef struct poll_s
-{
+typedef struct poll_s {
 	int fd;
 	short evt;
 	short revt;
@@ -30,4 +32,4 @@ int poll_canread(poll_t *p, int fd);
 int poll_canwrite(poll_t *p, int fd);
 int poll_isclose(poll_t *p, int fd);
 
-#endif /* !PROJECT_COMMON_H */
+void *safe_malloc(size_t);
