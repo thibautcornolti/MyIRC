@@ -38,7 +38,7 @@ $(NAME_SERVER):	$(OBJ_SERVER)
 				gcc -o $(NAME_SERVER) $(OBJ_SERVER)
 
 $(NAME_CLIENT):	$(OBJ_CLIENT)
-				gcc -o $(NAME_CLIENT) $(OBJ_CLIENT)
+				gcc -o $(NAME_CLIENT) $(OBJ_CLIENT) $(LDFLAGS)
 
 clean:
 				rm -rf $(OBJ_SERVER)
