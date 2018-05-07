@@ -5,5 +5,5 @@ cmake-build-*
 *.o
 *~
 *#
-client
-server
+/client
+/server
