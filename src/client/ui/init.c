@@ -17,6 +17,7 @@ ui_t *create_ui()
 	ui->stop = &stop_ui;
 	ui->update = &update_ui;
 	ui->getEvent = &get_event_ui;
+	ui->processEvent = &process_event_ui;
 	ui->initWindows = &init_windows;
 	ui->stopWindows = &stop_windows;
 	ui->framecap = 10000;

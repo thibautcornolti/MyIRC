@@ -12,9 +12,10 @@ static void show_buffer(win_t *this)
 {
 	char *buffer = safe_malloc(COLS);
 
+	mvwprintw(this->ncurses_win, 2, 2, "> ", buffer);
 	for (size_t i = 0; i < 2; ++i) {
-		memcpy(buffer, this->ui->buffer + i * (COLS - 4), COLS - 4);
-		mvwprintw(this->ncurses_win, 2 + i, 2, "%s", buffer);
+		memcpy(buffer, this->ui->buffer + i * (COLS - 6), COLS - 6);
+		mvwprintw(this->ncurses_win, 2 + i, 4, "%s", buffer);
 	}
 	free(buffer);
 }

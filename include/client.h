@@ -40,6 +40,7 @@ typedef struct ui_s {
 	void (*stop)(struct ui_s *);
 	void (*update)(struct ui_s *);
 	bool (*getEvent)(struct ui_s *);
+	void (*processEvent)(struct ui_s *);
 	void (*initWindows)(struct ui_s *);
 	void (*stopWindows)(struct ui_s *);
 
@@ -48,6 +49,7 @@ typedef struct ui_s {
 	size_t framecap;
 
 	char *buffer;
+	char buffer_last;
 	size_t buffer_idx;
 	size_t buffer_size;
 } ui_t;
@@ -57,6 +59,7 @@ void init_ui(ui_t *);
 void stop_ui(ui_t *);
 void update_ui(ui_t *);
 bool get_event_ui(ui_t *);
+void process_event_ui(ui_t *);
 void init_windows(ui_t *);
 void stop_windows(ui_t *);
 
