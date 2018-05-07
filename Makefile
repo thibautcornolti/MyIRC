@@ -16,6 +16,7 @@ SRC_CLIENT	=	src/common/is_positive_integer.c	\
 				src/common/poll_cond.c				\
 				src/common/poll_interact.c			\
 				src/common/poll_wait.c				\
+				src/client/ui/ui.c					\
 				src/client/main.c
 
 OBJ_SERVER	=	$(SRC_SERVER:.c=.o)
@@ -27,6 +28,8 @@ NAME_SERVER	=	server
 NAME_CLIENT	=	client
 
 CFLAGS		=	-Iinclude
+
+LDFLAGS		=	-lncurses
 
 
 all:			$(NAME_SERVER) $(NAME_CLIENT)
