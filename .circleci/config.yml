@@ -15,8 +15,14 @@ jobs:
       - run:
           name: Server - Empty argument
           command: |
-            ./server &> /dev/null || return 0 && return 1
+            function server_empty_argument {
+              ./server &> /dev/null || return 0 && return 1
+            }
+            server_empty_argument
       - run:
           name: Server - Invalid port
           command: |
-            ./server -1 &> /dev/null || return 0 && return 1
+            function server_invalid_port {
+              ./server -1 &> /dev/null || return 0 && return 1
+            }
+            server_invalid_port
