@@ -7,7 +7,6 @@
 
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <zconf.h>
 #include <string.h>
 #include <stdio.h>
 
