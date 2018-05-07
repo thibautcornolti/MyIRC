@@ -8,10 +8,10 @@ jobs:
       - run:
           name: Makefile
           command: make
-      - run:
-          name: Client - Empty command
-          command: |
-            echo "" | ./client
+      # - run:
+      #     name: Client - Empty command
+      #     command: |
+      #       echo "" | ./client
       - run:
           name: Server - Empty argument
           command: |
