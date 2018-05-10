@@ -9,6 +9,8 @@ SRC_SERVER	=	src/common/is_positive_integer.c	\
 				src/common/poll_cond.c				\
 				src/common/poll_interact.c			\
 				src/common/poll_wait.c				\
+				src/server/accept_client.c			\
+				src/server/client.c					\
 				src/server/create_server.c			\
 				src/server/main.c
 

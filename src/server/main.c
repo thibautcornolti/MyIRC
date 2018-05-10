@@ -7,12 +7,23 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "common.h"
+#include <sys/socket.h>
+#include <zconf.h>
 #include "server.h"
 
 static int core(int serv)
 {
+	client_t *cli = NULL;
+	poll_t *p = NULL;
+	int inf = 1;
 
+	poll_add(&p, serv, POLLIN);
+	while (inf) {
+		poll_wait(p, -1);
+		if (poll_canread(p, serv))
+			accept_client(serv, &cli, &p);
+		read_all_cli(&cli, &p);
+	}
 }
 
 int main(int ac, char **av)

@@ -28,10 +28,11 @@ int poll_add(poll_t **p, int fd, short evt)
 	return (1);
 }
 
-int poll_rm(poll_t **p, int fd)
+int poll_rm(poll_t **p, int fd) //TODO Coding Style
 {
 	poll_t *tmp;
 	poll_t *cpy = *p;
+	size_t i = 0;
 
 	if (!cpy)
 		return (0);
@@ -44,9 +45,12 @@ int poll_rm(poll_t **p, int fd)
 		if (cpy->next->fd == fd) {
 			tmp = cpy->next;
 			cpy->next = cpy->next->next;
+			if (i == 0)
+				*p = tmp;
 			free(tmp);
 			return (1);
 		}
+		i++;
 		cpy = cpy->next;
 	}
 	return (0);
