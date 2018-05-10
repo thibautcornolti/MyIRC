@@ -1,6 +1,9 @@
 CMakeLists.txt
 cmake-build-*
 .idea
+.vscode
 *.o
 *~
 *#
+/client
+/server

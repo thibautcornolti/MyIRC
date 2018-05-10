@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: thibautcornolti/epitech-build
+    steps:
+      - checkout
+      - run:
+          name: Makefile
+          command: make
+      # - run:
+      #     name: Client - Empty command
+      #     command: |
+      #       echo "" | ./client
+      - run:
+          name: Server - Empty argument
+          command: |
+            function server_empty_argument {
+              ./server &> /dev/null || return 0 && return 1
+            }
+            server_empty_argument
+      - run:
+          name: Server - Invalid port
+          command: |
+            function server_invalid_port {
+              ./server -1 &> /dev/null || return 0 && return 1
+            }
+            server_invalid_port

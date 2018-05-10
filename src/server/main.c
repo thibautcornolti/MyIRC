@@ -33,12 +33,12 @@ int main(int ac, char **av)
 
 	if (ac != 2 || !is_positive_integer(av[1], 65535)) {
 		dprintf(2, "USAGE: %s PORT\n", av[0]);
-		return (84);
+		return (EXIT_FAILURE);
 	}
 	port = (uint16_t) atoi(av[1]);
 	serv = create_server(port);
 	if (serv == -1)
-		return (84);
+		return (EXIT_FAILURE);
 	core(serv);
-	return (0);
+	return (EXIT_SUCCESS);
 }
