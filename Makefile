@@ -5,14 +5,21 @@
 ## main.c
 ##
 
-SRC_SERVER	=	src/common/is_positive_integer.c	\
+SRC_SERVER	=	src/common/free_array.c				\
+				src/common/is_positive_integer.c	\
 				src/common/poll_cond.c				\
 				src/common/poll_interact.c			\
 				src/common/poll_wait.c				\
+				src/common/split_str.c				\
 				src/server/accept_client.c			\
 				src/server/client.c					\
 				src/server/create_server.c			\
-				src/server/main.c
+				src/server/data_send.c				\
+				src/server/main.c					\
+				src/server/read_all_client.c		\
+				src/server/sock_io.c				\
+				src/server/update_write_poll.c		\
+				src/server/write_all_client.c
 
 SRC_CLIENT	=	src/common/is_positive_integer.c	\
 				src/common/poll_cond.c				\

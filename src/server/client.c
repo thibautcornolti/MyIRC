@@ -40,3 +40,27 @@ int client_add(client_t **cli, client_t *to_add)
 	}
 	return (1);
 }
+
+int client_rm(client_t **cli, client_t *to_rm)
+{
+	client_t *tmp;
+	client_t *cpy = *cli;
+
+	if (!cpy)
+		return (0);
+	if (cpy == to_rm) {
+		*cli = cpy->next;
+		free(cpy);
+		return (1);
+	}
+	while (cpy->next) {
+		if (cpy->next == to_rm) {
+			tmp = cpy->next;
+			cpy->next = cpy->next->next;
+			free(tmp);
+			return (1);
+		}
+		cpy = cpy->next;
+	}
+	return (0);
+}

@@ -17,6 +17,7 @@ int poll_add(poll_t **p, int fd, short evt)
 		return (0);
 	new_elem->fd = fd;
 	new_elem->evt = evt;
+	new_elem->revt = 0;
 	new_elem->next = NULL;
 	if (!*p)
 		*p = new_elem;
@@ -28,29 +29,25 @@ int poll_add(poll_t **p, int fd, short evt)
 	return (1);
 }
 
-int poll_rm(poll_t **p, int fd) //TODO Coding Style
+int poll_rm(poll_t **p, int fd)
 {
 	poll_t *tmp;
 	poll_t *cpy = *p;
-	size_t i = 0;
 
 	if (!cpy)
 		return (0);
-	if (!cpy->next && cpy->fd == fd) {
-		free(*p);
-		*p = NULL;
+	if (cpy->fd == fd) {
+		*p = cpy->next;
+		free(cpy);
 		return (1);
 	}
 	while (cpy->next) {
 		if (cpy->next->fd == fd) {
 			tmp = cpy->next;
 			cpy->next = cpy->next->next;
-			if (i == 0)
-				*p = tmp;
 			free(tmp);
 			return (1);
 		}
-		i++;
 		cpy = cpy->next;
 	}
 	return (0);
@@ -62,7 +59,7 @@ int poll_update(poll_t *p, int fd, short evt)
 
 	if (!cpy)
 		return (0);
-	while (cpy->next) {
+	while (cpy) {
 		if (cpy->fd == fd) {
 			cpy->evt = evt;
 			return (1);

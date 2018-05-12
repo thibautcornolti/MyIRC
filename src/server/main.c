@@ -11,7 +11,7 @@
 #include <zconf.h>
 #include "server.h"
 
-static int core(int serv)
+static void core(int serv)
 {
 	client_t *cli = NULL;
 	poll_t *p = NULL;
@@ -23,6 +23,8 @@ static int core(int serv)
 		if (poll_canread(p, serv))
 			accept_client(serv, &cli, &p);
 		read_all_cli(&cli, &p);
+		write_all_cli(cli, p);
+		update_write_poll(cli, p);
 	}
 }
 

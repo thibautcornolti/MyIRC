@@ -9,6 +9,7 @@
 #include <netinet/in.h>
 #include <string.h>
 #include <stdio.h>
+#include <zconf.h>
 
 static int create_sock(int *ret)
 {

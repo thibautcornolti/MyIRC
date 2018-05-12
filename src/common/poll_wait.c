@@ -20,7 +20,7 @@ static size_t size_list(poll_t *p)
 	return (ret);
 }
 
-static void poll_apply(struct pollfd *p_to, poll_t *p_src, size_t size)
+static void poll_apply(struct pollfd *p_to, poll_t *p_src)
 {
 	size_t i = 0;
 
@@ -50,7 +50,7 @@ int poll_wait(poll_t *p, int timeout)
 	size_t size = size_list(p);
 	struct pollfd p_to[size];
 
-	poll_apply(p_to, p, size);
+	poll_apply(p_to, p);
 	ret = poll(p_to, size, timeout);
 	poll_apply_end(p_to, p);
 	return (ret);
