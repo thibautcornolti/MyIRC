@@ -14,7 +14,7 @@ static void run()
 
 	ui->init(ui);
 	set_master_ui(ui);
-	while (ui->getEvent(ui)) {
+	while (ui->getEvent(ui) && !ui->hasToQuit) {
 		ui->processEvent(ui);
 		ui->update(ui);
 	}
