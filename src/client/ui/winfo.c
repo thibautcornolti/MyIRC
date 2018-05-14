@@ -29,7 +29,7 @@ static void update_w_info_nick(win_t *this)
 		mvwprintw(this->ncurses_win, 3, 2, "Nickname");
 		wattroff(this->ncurses_win, A_BOLD);
 		wattron(this->ncurses_win, A_ITALIC);
-		mvwprintw(this->ncurses_win, 3, 15, "%s",
+		mvwprintw(this->ncurses_win, 3, 15, "|%s|",
 			this->ui->session->nickname);
 		wattroff(this->ncurses_win, A_ITALIC);
 	}
