@@ -9,22 +9,24 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <zconf.h>
+#include <server.h>
 #include "server.h"
 
 static void core(int serv)
 {
-	client_t *cli = NULL;
-	poll_t *p = NULL;
+	server_t s;
 	int inf = 1;
 
-	poll_add(&p, serv, POLLIN);
+	s.clients = NULL;
+	s.poll = NULL;
+	poll_add(&s.poll, serv, POLLIN);
 	while (inf) {
-		poll_wait(p, -1);
-		if (poll_canread(p, serv))
-			accept_client(serv, &cli, &p);
-		read_all_cli(&cli, &p);
-		write_all_cli(cli, p);
-		update_write_poll(cli, p);
+		poll_wait(s.poll, -1);
+		if (poll_canread(s.poll, serv))
+			accept_client(serv, &s.clients, &s.poll);
+		read_all_cli(&s);
+		write_all_cli(&s);
+		update_write_poll(s.clients, s.poll);
 	}
 }
 

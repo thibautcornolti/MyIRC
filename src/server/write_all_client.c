@@ -5,6 +5,7 @@
 ** write_all_client.c
 */
 
+#include <server.h>
 #include "server.h"
 
 static void send_msg(client_t *cli, data_send_t *msg)
@@ -15,13 +16,15 @@ static void send_msg(client_t *cli, data_send_t *msg)
 		send_msg(cli, msg->next);
 }
 
-void write_all_cli(client_t *cli, poll_t *p)
+void write_all_cli(server_t *server)
 {
+	client_t *cli = server->clients;
+
 	while (cli) {
-		if (poll_canwrite(p, cli->fd)) {
+		if (poll_canwrite(server->poll, cli->fd)) {
 			send_msg(cli, cli->to_send);
-			data_send_clear(&cli->to_send);
-			poll_update(p, cli->fd, POLLIN | POLLHUP);
+			msg_send_clear(&cli->to_send);
+			poll_update(server->poll, cli->fd, POLLIN | POLLHUP);
 		}
 		cli = cli->next;
 	}
