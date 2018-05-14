@@ -7,15 +7,26 @@
 
 SRC_SERVER	=	src/common/free_array.c				\
 				src/common/is_positive_integer.c	\
+				src/common/len_array.c				\
 				src/common/poll_cond.c				\
 				src/common/poll_interact.c			\
 				src/common/poll_wait.c				\
 				src/common/split_str.c				\
+				src/common/str_tolower.c			\
+				src/server/data_sendf/data_sendf.c	\
+				src/server/data_sendf/place_char.c	\
+				src/server/data_sendf/place_int.c	\
+				src/server/data_sendf/place_str.c	\
+				src/server/data_sendf/place_unsigned_int.c	\
+				src/server/fnt/nick.c				\
+				src/server/fnt/user.c				\
 				src/server/accept_client.c			\
 				src/server/client.c					\
 				src/server/create_server.c			\
 				src/server/data_send.c				\
+				src/server/exec_cmd.c				\
 				src/server/main.c					\
+				src/server/parse_cmd.c				\
 				src/server/read_all_client.c		\
 				src/server/sock_io.c				\
 				src/server/update_write_poll.c		\

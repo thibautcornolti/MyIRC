@@ -6,26 +6,46 @@
 */
 
 #include <zconf.h>
+#include <server.h>
 #include "server.h"
 
-void read_all_cli(client_t **cli, poll_t **p)
+static void p_cmd(server_t *serv, client_t *cli, char *cmd)
+{
+	cmd_t *c = parse_cmd(cmd);
+
+	if (!c)
+		return;
+	exec_cmd(serv, cli, c);
+	free_cmd(c);
+}
+
+static int read_cli(server_t *serv, client_t **tmp_cli)
 {
 	client_t *tmp;
-	client_t *tmp_cli = *cli;
+
+	char *s = read_sock(*tmp_cli);
+	if (!s) {
+		tmp = (*tmp_cli)->next;
+		poll_rm(&serv->poll, (*tmp_cli)->fd);
+		client_rm(&serv->clients, *tmp_cli);
+		printf("Client disconnected\n");
+		*tmp_cli = tmp;
+		return (0);
+	} else {
+		p_cmd(serv, *tmp_cli, s);
+		free(s);
+	}
+	return (1);
+}
+
+void read_all_cli(server_t *s)
+{
+	client_t *tmp_cli = s->clients;
 
 	while (tmp_cli) {
-		if (poll_canread(*p, tmp_cli->fd)) {
-			char *s = read_sock(tmp_cli);
-			if (!s) {
-				tmp = tmp_cli->next;
-				poll_rm(p, tmp_cli->fd);
-				client_rm(cli, tmp_cli);
-				printf("Client disconnected\n");
-				tmp_cli = tmp;
-				continue;
-			} else
-				data_send_add(&tmp_cli->to_send, "Salut\n");
-		}
+		if (poll_canread(s->poll, tmp_cli->fd) &&
+		!read_cli(s, &tmp_cli))
+			continue;
 		tmp_cli = tmp_cli->next;
 	}
 }

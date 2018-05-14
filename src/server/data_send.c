@@ -7,7 +7,7 @@
 
 #include "server.h"
 
-int data_send_add(data_send_t **ds, char *data)
+int msg_send(data_send_t **ds, char *data)
 {
 	data_send_t *tmp = *ds;
 	data_send_t *new_elem = malloc(sizeof(data_send_t));
@@ -26,7 +26,7 @@ int data_send_add(data_send_t **ds, char *data)
 	return (1);
 }
 
-void data_send_clear(data_send_t **ds)
+void msg_send_clear(data_send_t **ds)
 {
 	data_send_t *cpy = *ds;
 	data_send_t *tmp;
