@@ -30,7 +30,7 @@ bool cmd_nick(sess_t *sess, char *line)
 	if (new_nickname && strlen(new_nickname))
 		sess->nickname = strdup(new_nickname);
 	else
-		sess->nickname = strdup("iencli");
+		sess->nickname = strdup(getlogin());
 	free(new_nickname);
 	return (true);
 }

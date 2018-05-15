@@ -6,7 +6,6 @@
 */
 
 #include "client.h"
-#include "common.h"
 
 void update_w_logs(win_t *this)
 {

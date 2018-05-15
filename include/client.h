@@ -22,6 +22,8 @@
 #include <time.h>
 #include <unistd.h>
 
+#include "common.h"
+
 struct ui_s;
 
 /*
@@ -47,6 +49,7 @@ typedef struct serv_s {
 
 typedef struct sess_s {
 	serv_t serv;
+	poll_t *pl;
 	char *nickname;
 } sess_t;
 

@@ -46,5 +46,6 @@ bool do_cmd(ui_t *ui)
 	else if ((fctn = cmd_to_fctn(ui->buffer + 1)) >= 0)
 		res = fcts[fctn](
 			ui->session, ui->buffer + strlen(refs[fctn]) + 2);
+	ui->w_info->update(ui->w_info);
 	return (res);
 }

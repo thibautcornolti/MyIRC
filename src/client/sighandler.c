@@ -6,7 +6,6 @@
 */
 
 #include "client.h"
-#include "common.h"
 
 ui_t *set_master_ui(ui_t *ui)
 {

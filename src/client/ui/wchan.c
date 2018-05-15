@@ -6,7 +6,6 @@
 */
 
 #include "client.h"
-#include "common.h"
 
 void update_w_chan(win_t *this)
 {

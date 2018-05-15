@@ -6,7 +6,6 @@
 */
 
 #include "client.h"
-#include "common.h"
 
 ui_t *create_ui()
 {

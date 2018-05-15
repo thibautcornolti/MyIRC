@@ -6,7 +6,6 @@
 */
 
 #include "client.h"
-#include "common.h"
 
 static void run()
 {
@@ -14,9 +13,13 @@ static void run()
 
 	ui->init(ui);
 	set_master_ui(ui);
-	while (ui->getEvent(ui) && !ui->hasToQuit) {
-		ui->processEvent(ui);
-		ui->update(ui);
+	ui->update(ui);
+	while (!ui->hasToQuit) {
+		poll_wait(ui->session->pl, -1);
+		if (poll_canread(ui->session->pl, 0)) {
+			ui->getEvent(ui);
+			ui->processEvent(ui);
+		}
 	}
 	ui->stop(ui);
 }

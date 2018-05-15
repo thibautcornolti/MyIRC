@@ -6,7 +6,6 @@
 */
 
 #include "client.h"
-#include "common.h"
 
 static void update_w_info_server(win_t *this)
 {

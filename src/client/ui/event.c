@@ -6,7 +6,6 @@
 */
 
 #include "client.h"
-#include "common.h"
 
 bool get_event_ui(ui_t *this)
 {
@@ -38,4 +37,5 @@ void process_event_ui(ui_t *this)
 	}
 	else if (c == 27)
 		this->hasToQuit = true;
+	this->w_chat->update(this->w_chat);	
 }

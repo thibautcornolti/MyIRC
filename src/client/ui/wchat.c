@@ -6,7 +6,6 @@
 */
 
 #include "client.h"
-#include "common.h"
 
 static void show_buffer(win_t *this)
 {
