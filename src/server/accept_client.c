@@ -20,8 +20,11 @@ int accept_client(int sock_serv, client_t **cli, poll_t **p)
 	to_push.log_state = 0;
 	to_push.nickname = NULL;
 	to_push.to_send = NULL;
-	msg_sendf(&to_push.to_send, "%s %s :%s\n", "020", "*", "Please wait "
-	"while we process your connection.");
+	to_push.idx_buf = 0;
+	to_push.buf = NULL;
+	to_push.channel = NULL;
+	msg_sendf(&to_push.to_send, ":%s 020 * :%s\r\n", "localhost",
+		  "Please wait while we process your connection.");
 	if (!client_add(cli, &to_push) || !poll_add(p, sock, POLLIN)) {
 		close(sock);
 		return (0);

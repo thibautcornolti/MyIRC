@@ -20,6 +20,11 @@ static char *sock_io_split(char *line)
 		free(line);
 		return (NULL);
 	}
+	int i = 0;
+	while (tmp[i]) {
+		printf("[%d]%s\n", i, tmp[i]);
+		i += 1;
+	}
 	if (tmp && tmp[0] && strlen(tmp[0]) != 0)
 		ret = strdup(tmp[0]);
 	else
@@ -49,6 +54,30 @@ char *read_sock(client_t *cli)
 	}
 	ret[512] = 0;
 	return (sock_io_split(ret));
+}
+
+int read_cmd(client_t *cli) //TODO Coding style
+{
+	char tmp;
+
+	if (!cli->buf)
+		cli->buf = malloc(sizeof(char) * (512 + 1));
+	if (!cli->buf)
+		return (0);
+	if (read(cli->fd, &tmp, 1) == 0)
+		return (0);
+	cli->buf[cli->idx_buf] = tmp;
+	cli->buf[cli->idx_buf + 1] = '\0';
+	cli->buf[512] = '\0';
+	cli->idx_buf += 1;
+	if (cli->idx_buf >= 511)
+		cli->idx_buf = 0;
+	if (strstr(cli->buf, "\r\n")) {
+		cli->buf[strlen(cli->buf) - 2] = '\0';
+		cli->idx_buf = 0;
+		return (2);
+	}
+	return (1);
 }
 
 int send_sock(client_t *cli, char *msg)

@@ -35,9 +35,9 @@ static void place_int_in_str(char *str, unsigned int nb, size_t len)
 	}
 }
 
-int place_unsigned_int(va_list *list, char **str, size_t *i)
+int place_unsigned_int(va_list list, char **str, size_t *i)
 {
-	unsigned int arg = va_arg(*list, unsigned int);
+	unsigned int arg = va_arg(list, unsigned int);
 	size_t len = size_int(arg);
 
 	*str = realloc(*str, sizeof(char *) + (strlen(*str) + len));

@@ -11,6 +11,7 @@ SRC_SERVER	=	src/common/free_array.c				\
 				src/common/poll_cond.c				\
 				src/common/poll_interact.c			\
 				src/common/poll_wait.c				\
+				src/common/split_cmd.c				\
 				src/common/split_str.c				\
 				src/common/str_tolower.c			\
 				src/server/data_sendf/data_sendf.c	\
@@ -18,9 +19,13 @@ SRC_SERVER	=	src/common/free_array.c				\
 				src/server/data_sendf/place_int.c	\
 				src/server/data_sendf/place_str.c	\
 				src/server/data_sendf/place_unsigned_int.c	\
+				src/server/fnt/join.c				\
 				src/server/fnt/nick.c				\
+				src/server/fnt/part.c				\
 				src/server/fnt/user.c				\
 				src/server/accept_client.c			\
+				src/server/broadcast_channel.c		\
+				src/server/channel.c				\
 				src/server/client.c					\
 				src/server/create_server.c			\
 				src/server/data_send.c				\

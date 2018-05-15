@@ -11,9 +11,9 @@
 #include <stdio.h>
 #include <string.h>
 
-int place_str(va_list *list, char **str, size_t *i)
+int place_str(va_list list, char **str, size_t *i)
 {
-	char *arg = va_arg(*list, char *);
+	char *arg = va_arg(list, char *);
 
 	*str = realloc(*str, sizeof(char *) + (strlen(*str) + strlen(arg)));
 	if (!*str)

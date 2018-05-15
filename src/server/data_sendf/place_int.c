@@ -44,9 +44,9 @@ static void place_int_in_str(char *str, int nb, size_t len)
 	}
 }
 
-int place_int(va_list *list, char **str, size_t *i)
+int place_int(va_list list, char **str, size_t *i)
 {
-	int arg = va_arg(*list, int);
+	int arg = va_arg(list, int);
 	size_t len = size_int(arg);
 
 	*str = realloc(*str, sizeof(char *) + (strlen(*str) + len));

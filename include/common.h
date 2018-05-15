@@ -36,8 +36,10 @@ void *safe_malloc(size_t);
 
 char **split_str(char *str, char *delim);
 
+char **split_cmd(char *str);
+
 void free_array(void **arr);
 
 size_t len_array(void **arr);
 
-void str_tolower(char *str);
+void str_toupper(char *str);
