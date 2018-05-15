@@ -42,11 +42,26 @@ SRC_CLIENT	=	src/common/is_positive_integer.c	\
 				src/common/poll_interact.c			\
 				src/common/poll_wait.c				\
 				src/common/malloc.c					\
+				src/client/core/action.c			\
+				src/client/core/cmd/server.c		\
+				src/client/core/cmd/nick.c			\
+				src/client/core/cmd/list.c			\
+				src/client/core/cmd/join.c			\
+				src/client/core/cmd/part.c			\
+				src/client/core/cmd/users.c			\
+				src/client/core/cmd/names.c			\
+				src/client/core/cmd/msg.c			\
+				src/client/core/cmd/accept_file.c	\
+				src/client/core/cmd/broadcast.c		\
 				src/client/ui/event.c				\
 				src/client/ui/init.c				\
 				src/client/ui/update.c				\
-				src/client/ui/cli.c					\
+				src/client/ui/wchat.c				\
+				src/client/ui/wchan.c				\
+				src/client/ui/winfo.c				\
+				src/client/ui/wlogs.c				\
 				src/client/ui/window.c				\
+				src/client/session.c				\
 				src/client/sighandler.c				\
 				src/client/main.c
 

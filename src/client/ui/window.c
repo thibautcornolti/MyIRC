@@ -6,7 +6,6 @@
 */
 
 #include "client.h"
-#include "common.h"
 
 win_t *create_window(ui_t *ui, void (*update_w_fct)(win_t *))
 {

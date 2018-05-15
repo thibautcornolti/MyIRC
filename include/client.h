@@ -7,23 +7,72 @@
 
 #pragma once
 
+#include <arpa/inet.h>
+#include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <ncurses.h>
+#include <netdb.h>
+#include <netinet/in.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/socket.h>
+#include <sys/types.h>
 #include <time.h>
 #include <unistd.h>
 
-#define get_master_ui() set_master_ui(NULL)
+#include "common.h"
+
+struct ui_s;
+
+/*
+** Utils
+*/
 
 typedef struct {
 	size_t x;
 	size_t y;
 } pos_t;
 
-struct ui_s;
+/*
+** Core
+*/
+
+typedef struct serv_s {
+	char *host;
+	int port;
+	int fd;
+	bool connected;
+	struct sockaddr_in s_in;
+} serv_t;
+
+typedef struct sess_s {
+	serv_t serv;
+	poll_t *pl;
+	char *nickname;
+} sess_t;
+
+sess_t *create_sess();
+
+bool do_cmd(struct ui_s *);
+
+bool cmd_server(struct sess_s *, char *);
+bool cmd_nick(struct sess_s *, char *);
+bool cmd_list(struct sess_s *, char *);
+bool cmd_join(struct sess_s *, char *);
+bool cmd_part(struct sess_s *, char *);
+bool cmd_users(struct sess_s *, char *);
+bool cmd_names(struct sess_s *, char *);
+bool cmd_msg(struct sess_s *, char *);
+bool cmd_accept_file(struct sess_s *, char *);
+bool cmd_broadcast(struct sess_s *, char *);
+
+/*
+** User Interface
+*/
+
+#define get_master_ui() set_master_ui(NULL)
 
 typedef struct win_s {
 	void (*init)(struct win_s *);
@@ -45,8 +94,13 @@ typedef struct ui_s {
 	void (*stopWindows)(struct ui_s *);
 
 	win_t *w_chat;
+	win_t *w_chan;
+	win_t *w_info;
+	win_t *w_logs;
 
 	size_t framecap;
+	bool hasToQuit;
+	sess_t *session;
 
 	char *buffer;
 	char buffer_last;
@@ -67,6 +121,9 @@ win_t *create_window(ui_t *, void (*)(win_t *));
 void init_window(win_t *);
 void stop_window(win_t *);
 
-void update_w_cli(win_t *);
+void update_w_chat(win_t *);
+void update_w_chan(win_t *);
+void update_w_info(win_t *);
+void update_w_logs(win_t *);
 
 ui_t *set_master_ui(ui_t *);
