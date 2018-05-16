@@ -63,15 +63,19 @@ bool cmd_server(sess_t *sess, char *line)
 	char *host = get_host(line);
 	int port = get_port(line);
 
-	memset(&sess->serv, 0, sizeof(serv_t));
-	sess->serv.host = strdup(host);
-	sess->serv.port = port;
-	if (!cmd_server_init(&sess->serv))
+	errno = 0;
+	sess->serv->connected = false;
+	sess->serv->host = strdup(host);
+	sess->serv->port = port;
+	if (!cmd_server_init(sess->serv) || !cmd_server_connect(sess->serv, host, port)) {
+		if (errno)
+			sess->logger->log(sess->logger, strerror(errno));
 		res = false;
-	else if (!cmd_server_connect(&sess->serv, host, port))
-		res = false;
-	else
-		sess->serv.connected = true;
+	} else {
+		sess->serv->connected = true;
+		sess->logger->log(sess->logger, "Connected!");
+		poll_add(&sess->pl, sess->serv->fd, POLLIN);
+	}
 	free(host);
 	return (res);
 }

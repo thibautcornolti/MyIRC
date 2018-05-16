@@ -9,14 +9,14 @@
 
 static void update_w_info_server(win_t *this)
 {
-	if (this->ui->session->serv.connected) {
+	if (this->ui->session->serv->connected) {
 		wattron(this->ncurses_win, A_BOLD);
 		mvwprintw(this->ncurses_win, 5, 2, "Server");
 		wattroff(this->ncurses_win, A_BOLD);
 		wattron(this->ncurses_win, A_ITALIC);		
 		mvwprintw(this->ncurses_win, 5, 15, "%s:%d",
-			this->ui->session->serv.host,
-			this->ui->session->serv.port);
+			this->ui->session->serv->host,
+			this->ui->session->serv->port);
 		wattroff(this->ncurses_win, A_ITALIC);			
 	}
 }

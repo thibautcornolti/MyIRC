@@ -9,5 +9,7 @@
 
 bool cmd_users(sess_t *sess, char *line)
 {
+	(void) sess;
+	(void) line;
 	return (true);
 }

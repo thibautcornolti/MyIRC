@@ -9,6 +9,7 @@
 
 bool cmd_broadcast(sess_t *sess, char *line)
 {
-	printf("BROADCAST\n");
+	(void) sess;
+	(void) line;
 	return (true);
 }

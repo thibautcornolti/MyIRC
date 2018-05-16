@@ -7,9 +7,8 @@
 
 #include "client.h"
 
-bool cmd_names(sess_t *sess, char *line)
+bool do_srv(ui_t *ui)
 {
-	(void) sess;
-	(void) line;
+	ui->session->logger->log(ui->session->logger, ui->session->serv->buffer);
 	return (true);
 }

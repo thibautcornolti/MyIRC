@@ -20,6 +20,11 @@ static void run()
 			ui->getEvent(ui);
 			ui->processEvent(ui);
 		}
+		if (ui->session->serv->connected &&
+			poll_canread(ui->session->pl, ui->session->serv->fd)) {
+			ui->getServerEvent(ui);
+			ui->processServerEvent(ui);
+		}
 	}
 	ui->stop(ui);
 }

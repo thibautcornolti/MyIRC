@@ -19,6 +19,8 @@ ui_t *create_ui()
 	ui->processEvent = &process_event_ui;
 	ui->initWindows = &init_windows;
 	ui->stopWindows = &stop_windows;
+	ui->getServerEvent = &get_event_serv;
+	ui->processServerEvent = &process_event_serv;
 	ui->framecap = 70000;
 	ui->hasToQuit = false;
 	ui->buffer_size = 1025;
@@ -42,6 +44,8 @@ void init_ui(ui_t *this)
 	flags = fcntl(0, F_GETFL, 0);
 	fcntl(0, F_SETFL, flags | O_NONBLOCK);
 	this->initWindows(this);
+	this->session->logger->log(
+		this->session->logger, "Welcome to my IRC client!");
 }
 
 void stop_ui(ui_t *this)

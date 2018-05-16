@@ -47,5 +47,6 @@ bool do_cmd(ui_t *ui)
 		res = fcts[fctn](
 			ui->session, ui->buffer + strlen(refs[fctn]) + 2);
 	ui->w_info->update(ui->w_info);
+	ui->w_logs->update(ui->w_logs);
 	return (res);
 }
