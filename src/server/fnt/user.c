@@ -16,6 +16,9 @@ void user_cmd(server_t *server, client_t *cli, cmd_t *cmd)
 		"Not enough paramters");
 		return;
 	}
+	cli->username = strdup(cmd->args[0]);
+	if (!cli->username)
+		return;
 	cli->log_state |= 0x10;
 	if (cli->log_state == 0x11) {
 		msg_sendf(&cli->to_send, ":%s 001 %s :Welcome to the Internet "

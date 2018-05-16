@@ -9,7 +9,7 @@
 #include <zconf.h>
 #include "server.h"
 
-int accept_client(int sock_serv, client_t **cli, poll_t **p)
+int accept_client(int sock_serv, client_t **cli, poll_t **p) //TODO Coding style
 {
 	client_t to_push;
 	int sock = accept(sock_serv, NULL, 0);
@@ -19,8 +19,10 @@ int accept_client(int sock_serv, client_t **cli, poll_t **p)
 	to_push.fd = sock;
 	to_push.log_state = 0;
 	to_push.nickname = NULL;
+	to_push.username = NULL;
 	to_push.to_send = NULL;
 	to_push.idx_buf = 0;
+	to_push.quit = 0;
 	to_push.buf = NULL;
 	to_push.channel = NULL;
 	msg_sendf(&to_push.to_send, ":%s 020 * :%s\r\n", "localhost",

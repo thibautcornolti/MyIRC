@@ -43,13 +43,12 @@ static void send_list_user(server_t *server, client_t *cli, cmd_t *cmd)
 	msg_sendf(&cli->to_send, ":%s 366 %s %s :%s\r\n", "localhost",
 	cli->nickname, cmd->args[0], "End of NAMES list.");
 	//BROADCAST    :test2!~d@163.5.141.157 JOIN :#lol
-	broadcast_to_channel(server->clients, cli, cmd->args[0], ":");
 	free(list);
 }
 
 void join_cmd(server_t *server, client_t *cli, cmd_t *cmd)
 {
-	int ret;
+	int ret = 0;
 
 	if (cmd->ac == 0) {
 		msg_sendf(&cli->to_send, ":%s 461 %s JOIN :%s\r\n",
@@ -61,12 +60,11 @@ void join_cmd(server_t *server, client_t *cli, cmd_t *cmd)
 		cli->nickname, cmd->args[0], "No such channel");
 		return;
 	}
-	ret = channel_add(&cli->channel, cmd->args[0]);
-	if (ret == 1) {
-//		msg_sendf(&cli->to_send, ":%s!~%s@localhost JOIN :%s\r\n",
-//	cli->nickname, cli->nickname, cmd->args[0]); //TODO Change second nickname by username
+	ret += channel_add(&cli->channel, cmd->args[0]);
+	ret += channel_add(&server->channel, cmd->args[0]);
+	if (ret >= 2) {
 		broadcast_channel(server->clients, cmd->args[0],
-	":%s!~%s@localhost JOIN :%s\r\n", cli->nickname, cli->nickname,
+	":%s!~%s@localhost JOIN :%s\r\n", cli->nickname, cli->username,
 	cmd->args[0]);
 		send_list_user(server, cli, cmd);
 	}

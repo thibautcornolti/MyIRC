@@ -50,6 +50,18 @@ int channel_contain(channel_t *chan, char *chan_name)
 	return (0);
 }
 
+size_t size_channel(client_t *all_cli, char *chan)
+{
+	size_t ret = 0;
+
+	while (all_cli) {
+		if (channel_contain(all_cli->channel, chan))
+			ret += 1;
+		all_cli = all_cli->next;
+	}
+	return (ret);
+}
+
 int channel_rm(channel_t **chan, char *chan_name)
 {
 	channel_t *tmp;

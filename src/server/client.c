@@ -38,6 +38,16 @@ int client_add(client_t **cli, client_t *to_add)
 	return (1);
 }
 
+static void free_client(client_t *cli)
+{
+	free(cli->username);
+	free(cli->nickname);
+	free(cli->buf);
+	free_channel(cli->channel);
+	free_data_msg(cli->to_send);
+	cli->buf = NULL;
+}
+
 int client_rm(client_t **cli, client_t *to_rm)
 {
 	client_t *tmp;
@@ -53,6 +63,7 @@ int client_rm(client_t **cli, client_t *to_rm)
 	while (cpy->next) {
 		if (cpy->next == to_rm) {
 			tmp = cpy->next;
+			free_client(tmp);
 			cpy->next = cpy->next->next;
 			free(tmp);
 			return (1);

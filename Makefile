@@ -22,14 +22,19 @@ SRC_SERVER	=	src/common/free_array.c				\
 				src/server/fnt/join.c				\
 				src/server/fnt/nick.c				\
 				src/server/fnt/part.c				\
+				src/server/fnt/privmsg.c			\
+				src/server/fnt/quit.c				\
 				src/server/fnt/user.c				\
 				src/server/accept_client.c			\
 				src/server/broadcast_channel.c		\
 				src/server/channel.c				\
 				src/server/client.c					\
+				src/server/close_empty_chan.c		\
 				src/server/create_server.c			\
 				src/server/data_send.c				\
 				src/server/exec_cmd.c				\
+				src/server/free_channel.c			\
+				src/server/free_data_msg.c			\
 				src/server/main.c					\
 				src/server/parse_cmd.c				\
 				src/server/read_all_client.c		\

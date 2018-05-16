@@ -13,6 +13,8 @@ static const cmd_list_t list[] = {
 	{"USER", 0, &user_cmd},
 	{"JOIN", 1, &join_cmd},
 	{"PART", 1, &part_cmd},
+	{"PRIVMSG", 1, &privmsg_cmd},
+	{"QUIT", 0, &quit_cmd},
 	{NULL, 0, NULL}
 };
 

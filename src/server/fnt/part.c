@@ -22,12 +22,18 @@ void part_cmd(server_t *server, client_t *cli, cmd_t *cmd)
 		return;
 	}
 	broadcast_channel(server->clients, cmd->args[0],
-	":%s!~%s@localhost PART %s :%s\r\n", cli->nickname, cli->nickname,
+	":%s!~%s@localhost PART %s :%s\r\n", cli->nickname, cli->username,
 	cmd->args[0], (cmd->ac >= 2) ? cmd->args[1] : "");
 	channel_rm(&cli->channel, cmd->args[0]);
+	if (size_channel(server->clients, cmd->args[0]) == 0)
+		channel_rm(&server->channel, cmd->args[0]);
 //	:irc.knoepflin.tk 403 test #lol :No such channel
 //	:irc.knoepflin.tk 442 test #lol :You're not on that channel
 //	:<nickname>!~<>username@localhost PART #<av[0]> :<av[1]>
 }
 //BROADCAST    :test2!~d@163.5.141.157 PART #lol :<msg>
 //BROADCASR    :Arthur!~arthur@163.5.141.157 PART #lol :salut
+
+
+//:toto!~a@vpn.dyjix.eu PRIVMSG #lol :Salut c
+//:toto!~a@vpn.dyjix.eu PRIVMSG test :test

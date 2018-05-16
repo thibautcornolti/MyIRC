@@ -18,6 +18,7 @@ static void core(int serv)
 	int inf = 1;
 
 	s.clients = NULL;
+	s.channel = NULL;
 	s.poll = NULL;
 	poll_add(&s.poll, serv, POLLIN);
 	while (inf) {

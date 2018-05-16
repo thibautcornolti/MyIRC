@@ -28,8 +28,10 @@ typedef struct client_s
 	int fd;
 	int log_state;
 	char *nickname;
+	char *username;
 	char *buf;
 	int idx_buf;
+	int quit;
 	data_send_t *to_send;
 	channel_t *channel;
 	struct client_s *next;
@@ -45,6 +47,7 @@ typedef struct
 typedef struct
 {
 	client_t *clients;
+	channel_t *channel;
 	poll_t *poll;
 } server_t;
 
@@ -91,10 +94,17 @@ int place_unsigned_int(va_list list, char **str, size_t *i);
 
 int channel_add(channel_t **chan, char *chan_name);
 int channel_contain(channel_t *chan, char *chan_name);
+size_t size_channel(client_t *all_cli, char *chan);
 int channel_rm(channel_t **chan, char *chan_name);
 
 void broadcast_to_channel(client_t *all_cli, client_t *cli, char *chan_name,
 char *msg);
+
+void free_channel(channel_t *channel);
+
+void free_data_msg(data_send_t *data);
+
+void close_empty_chan(server_t *s);
 
 /*
 ** FNT
@@ -104,5 +114,7 @@ void nick_cmd(server_t *server, client_t *cli, cmd_t *cmd);
 void user_cmd(server_t *server, client_t *cli, cmd_t *cmd);
 void join_cmd(server_t *server, client_t *cli, cmd_t *cmd);
 void part_cmd(server_t *server, client_t *client, cmd_t *cmd);
+void privmsg_cmd(server_t *server, client_t *cli, cmd_t *cmd);
+void quit_cmd(server_t *server, client_t *cli, cmd_t *cmd);
 
 #endif /* !PROJECT_SERVER_H */
