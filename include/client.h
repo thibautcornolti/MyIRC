@@ -39,16 +39,43 @@ typedef struct {
 ** Core
 */
 
+typedef struct log_s {
+	char *msg;
+	time_t timestamp;
+} log_t;
+
+typedef struct logger_s {
+	void (*add)(struct logger_s *, log_t);
+	void (*log)(struct logger_s *, char *);
+
+	log_t *logs;
+	size_t size;
+} logger_t;
+
+logger_t *create_logger();
+void add_logger(logger_t *, log_t);
+void log_logger(logger_t *, char *);
+
 typedef struct serv_s {
 	char *host;
 	int port;
 	int fd;
 	bool connected;
 	struct sockaddr_in s_in;
+
+	char *buffer;
+	char buffer_last;
+	size_t buffer_idx;
+	size_t buffer_size;
 } serv_t;
 
+serv_t *create_serv();
+
+bool do_srv(struct ui_s *);
+
 typedef struct sess_s {
-	serv_t serv;
+	serv_t *serv;
+	logger_t *logger;
 	poll_t *pl;
 	char *nickname;
 } sess_t;
@@ -92,6 +119,8 @@ typedef struct ui_s {
 	void (*processEvent)(struct ui_s *);
 	void (*initWindows)(struct ui_s *);
 	void (*stopWindows)(struct ui_s *);
+	bool (*getServerEvent)(struct ui_s *);
+	void (*processServerEvent)(struct ui_s *);
 
 	win_t *w_chat;
 	win_t *w_chan;
@@ -116,6 +145,8 @@ bool get_event_ui(ui_t *);
 void process_event_ui(ui_t *);
 void init_windows(ui_t *);
 void stop_windows(ui_t *);
+bool get_event_serv(ui_t *);
+void process_event_serv(ui_t *);
 
 win_t *create_window(ui_t *, void (*)(win_t *));
 void init_window(win_t *);

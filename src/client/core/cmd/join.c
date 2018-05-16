@@ -9,6 +9,7 @@
 
 bool cmd_join(sess_t *sess, char *line)
 {
-	printf("JOIN\n");
+	(void) sess;
+	(void) line;
 	return (true);
 }

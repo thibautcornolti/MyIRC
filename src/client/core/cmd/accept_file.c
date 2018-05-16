@@ -9,5 +9,7 @@
 
 bool cmd_accept_file(sess_t *sess, char *line)
 {
+	(void) sess;
+	(void) line;
 	return (true);
 }

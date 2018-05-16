@@ -33,6 +33,7 @@ int poll_canwrite(poll_t *p, int fd);
 int poll_isclose(poll_t *p, int fd);
 
 void *safe_malloc(size_t);
+void *safe_realloc(void *, size_t, size_t);
 
 char **split_str(char *str, char *delim);
 
