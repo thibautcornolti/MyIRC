@@ -22,18 +22,17 @@ static void p_cmd(server_t *serv, client_t *cli, char *cmd)
 static int read_cli(server_t *serv, client_t **tmp_cli)
 {
 	client_t *tmp;
+	int status = read_cmd(*tmp_cli);
 
-	char *s = read_sock(*tmp_cli);
-	if (!s) {
+	if (status == 2)
+		p_cmd(serv, *tmp_cli, (*tmp_cli)->buf);
+	else if (status == 0) {
 		tmp = (*tmp_cli)->next;
 		poll_rm(&serv->poll, (*tmp_cli)->fd);
 		client_rm(&serv->clients, *tmp_cli);
 		printf("Client disconnected\n");
 		*tmp_cli = tmp;
 		return (0);
-	} else {
-		p_cmd(serv, *tmp_cli, s);
-		free(s);
 	}
 	return (1);
 }

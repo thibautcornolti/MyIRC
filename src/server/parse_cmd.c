@@ -17,7 +17,7 @@ void free_cmd(cmd_t *cmd)
 cmd_t *parse_cmd(char *str)
 {
 	cmd_t *ret = malloc(sizeof(cmd_t));
-	char **split = split_str(str, " ");
+	char **split = split_cmd(str);
 
 	printf("CMD: %s\n", str);
 	if (!ret || !split) {
@@ -25,7 +25,7 @@ cmd_t *parse_cmd(char *str)
 		free_array((void **) split);
 		return (NULL);
 	}
-	str_tolower(split[0]);
+	str_toupper(split[0]);
 	ret->cmd = split[0];
 	ret->ac = len_array((void **) split) - 1;
 	ret->args = split + 1;

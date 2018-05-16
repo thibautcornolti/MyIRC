@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int is_delim(const char *str, const char *delim)
+static int is_delim(const char *str, const char *delim)
 {
 	if (strncmp(str, delim, strlen(delim)) == 0)
 		return (1);
@@ -65,7 +65,7 @@ static size_t len_token(const char *str, const char *delim, size_t idx)
 
 	while (str[i] && strncmp(str + i, delim, strlen(delim)) != 0)
 		i += 1;
-	return i - start;
+	return (i - start);
 }
 
 char **split_str(char *str, char *delim)

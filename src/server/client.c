@@ -26,11 +26,8 @@ int client_add(client_t **cli, client_t *to_add)
 
 	if (!new_elem)
 		return (0);
-	new_elem->to_send = to_add->to_send;
-	new_elem->nickname = to_add->nickname;
-	new_elem->log_state = to_add->log_state;
-	new_elem->fd = to_add->fd;
-	new_elem->next = NULL;
+	to_add->next = NULL;
+	memcpy(new_elem, to_add, sizeof(client_t));
 	if (!*cli)
 		*cli = new_elem;
 	else {
