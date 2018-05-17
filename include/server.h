@@ -106,6 +106,10 @@ void free_data_msg(data_send_t *data);
 
 void close_empty_chan(server_t *s);
 
+char *get_user_by_chan(client_t *all_cli, client_t *cli, char *chan_name);
+
+int channel_exist(channel_t *channel, char *name);
+
 /*
 ** FNT
 */
@@ -116,5 +120,7 @@ void join_cmd(server_t *server, client_t *cli, cmd_t *cmd);
 void part_cmd(server_t *server, client_t *client, cmd_t *cmd);
 void privmsg_cmd(server_t *server, client_t *cli, cmd_t *cmd);
 void quit_cmd(server_t *server, client_t *cli, cmd_t *cmd);
+void list_cmd(server_t *server, client_t *client, cmd_t *cmd);
+void names_cmd(server_t *server, client_t *client, cmd_t *cmd);
 
 #endif /* !PROJECT_SERVER_H */

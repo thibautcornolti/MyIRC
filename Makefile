@@ -20,6 +20,8 @@ SRC_SERVER	=	src/common/free_array.c				\
 				src/server/data_sendf/place_str.c	\
 				src/server/data_sendf/place_unsigned_int.c	\
 				src/server/fnt/join.c				\
+				src/server/fnt/list.c				\
+				src/server/fnt/names.c				\
 				src/server/fnt/nick.c				\
 				src/server/fnt/part.c				\
 				src/server/fnt/privmsg.c			\
@@ -28,6 +30,7 @@ SRC_SERVER	=	src/common/free_array.c				\
 				src/server/accept_client.c			\
 				src/server/broadcast_channel.c		\
 				src/server/channel.c				\
+				src/server/channel_exist.c			\
 				src/server/client.c					\
 				src/server/close_empty_chan.c		\
 				src/server/create_server.c			\
@@ -35,6 +38,7 @@ SRC_SERVER	=	src/common/free_array.c				\
 				src/server/exec_cmd.c				\
 				src/server/free_channel.c			\
 				src/server/free_data_msg.c			\
+				src/server/get_user_by_chan.c		\
 				src/server/main.c					\
 				src/server/parse_cmd.c				\
 				src/server/read_all_client.c		\
