@@ -26,7 +26,7 @@ static void run()
 			ui->processServerEvent(ui);
 		}
 	}
-	ui->stop(ui);
+	ui->free(ui);
 }
 
 int main()

@@ -39,6 +39,21 @@ typedef struct {
 ** Core
 */
 
+typedef struct commander_s {
+	size_t (*size)(struct commander_s *);
+	bool (*push)(struct commander_s *, char *, ...);
+	char *(*pop)(struct commander_s *);
+	void (*free)(struct commander_s *);
+
+	char *cmds[513];
+} commander_t;
+
+commander_t *create_commander();
+size_t size_commander(commander_t *);
+bool push_commander(commander_t *, char *, ...);
+char *pop_commander(commander_t *);
+void free_commander(commander_t *);
+
 typedef struct log_s {
 	char *msg;
 	time_t timestamp;
@@ -47,6 +62,7 @@ typedef struct log_s {
 typedef struct logger_s {
 	void (*add)(struct logger_s *, log_t);
 	void (*log)(struct logger_s *, char *);
+	void (*free)(struct logger_s *);
 
 	log_t *logs;
 	size_t size;
@@ -55,13 +71,18 @@ typedef struct logger_s {
 logger_t *create_logger();
 void add_logger(logger_t *, log_t);
 void log_logger(logger_t *, char *);
+void free_logger(logger_t *);
 
 typedef struct serv_s {
+	void (*free)(struct serv_s *);
+
 	char *host;
 	int port;
 	int fd;
 	bool connected;
 	struct sockaddr_in s_in;
+
+	commander_t *commander;
 
 	char *buffer;
 	char buffer_last;
@@ -70,10 +91,13 @@ typedef struct serv_s {
 } serv_t;
 
 serv_t *create_serv();
+void free_serv(serv_t *);
 
 bool do_srv(struct ui_s *);
 
 typedef struct sess_s {
+	void (*free)(struct sess_s *);
+
 	serv_t *serv;
 	logger_t *logger;
 	poll_t *pl;
@@ -81,6 +105,7 @@ typedef struct sess_s {
 } sess_t;
 
 sess_t *create_sess();
+void free_sess(sess_t *);
 
 bool do_cmd(struct ui_s *);
 
@@ -103,7 +128,7 @@ bool cmd_broadcast(struct sess_s *, char *);
 
 typedef struct win_s {
 	void (*init)(struct win_s *);
-	void (*stop)(struct win_s *);
+	void (*free)(struct win_s *);
 	void (*update)(struct win_s *);
 
 	WINDOW *ncurses_win;
@@ -113,12 +138,12 @@ typedef struct win_s {
 
 typedef struct ui_s {
 	void (*init)(struct ui_s *);
-	void (*stop)(struct ui_s *);
+	void (*free)(struct ui_s *);
 	void (*update)(struct ui_s *);
 	bool (*getEvent)(struct ui_s *);
 	void (*processEvent)(struct ui_s *);
 	void (*initWindows)(struct ui_s *);
-	void (*stopWindows)(struct ui_s *);
+	void (*freeWindows)(struct ui_s *);
 	bool (*getServerEvent)(struct ui_s *);
 	void (*processServerEvent)(struct ui_s *);
 
@@ -139,18 +164,18 @@ typedef struct ui_s {
 
 ui_t *create_ui();
 void init_ui(ui_t *);
-void stop_ui(ui_t *);
+void free_ui(ui_t *);
 void update_ui(ui_t *);
 bool get_event_ui(ui_t *);
 void process_event_ui(ui_t *);
 void init_windows(ui_t *);
-void stop_windows(ui_t *);
+void free_windows(ui_t *);
 bool get_event_serv(ui_t *);
 void process_event_serv(ui_t *);
 
 win_t *create_window(ui_t *, void (*)(win_t *));
 void init_window(win_t *);
-void stop_window(win_t *);
+void free_window(win_t *);
 
 void update_w_chat(win_t *);
 void update_w_chan(win_t *);

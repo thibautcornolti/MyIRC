@@ -20,6 +20,6 @@ void sig_handler(int sig)
 {
 	ui_t *ui = get_master_ui();
 
-	ui->stop(ui);
+	ui->free(ui);
 	(void) sig;
 }

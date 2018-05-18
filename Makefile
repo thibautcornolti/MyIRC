@@ -5,77 +5,79 @@
 ## main.c
 ##
 
-SRC_SERVER	=	src/common/free_array.c				\
-				src/common/is_positive_integer.c	\
-				src/common/len_array.c				\
-				src/common/poll_cond.c				\
-				src/common/poll_interact.c			\
-				src/common/poll_wait.c				\
-				src/common/split_cmd.c				\
-				src/common/split_str.c				\
-				src/common/str_tolower.c			\
-				src/server/data_sendf/data_sendf.c	\
-				src/server/data_sendf/place_char.c	\
-				src/server/data_sendf/place_int.c	\
-				src/server/data_sendf/place_str.c	\
+SRC_SERVER	=	src/common/free_array.c						\
+				src/common/is_positive_integer.c			\
+				src/common/len_array.c						\
+				src/common/poll_cond.c						\
+				src/common/poll_interact.c					\
+				src/common/poll_wait.c						\
+				src/common/split_cmd.c						\
+				src/common/split_str.c						\
+				src/common/str_tolower.c					\
+				src/server/data_sendf/data_sendf.c			\
+				src/server/data_sendf/place_char.c			\
+				src/server/data_sendf/place_int.c			\
+				src/server/data_sendf/place_str.c			\
 				src/server/data_sendf/place_unsigned_int.c	\
-				src/server/fnt/join.c				\
-				src/server/fnt/list.c				\
-				src/server/fnt/names.c				\
-				src/server/fnt/nick.c				\
-				src/server/fnt/part.c				\
-				src/server/fnt/privmsg.c			\
-				src/server/fnt/quit.c				\
-				src/server/fnt/user.c				\
-				src/server/accept_client.c			\
-				src/server/broadcast_channel.c		\
-				src/server/channel.c				\
-				src/server/channel_exist.c			\
-				src/server/client.c					\
-				src/server/close_empty_chan.c		\
-				src/server/create_server.c			\
-				src/server/data_send.c				\
-				src/server/exec_cmd.c				\
-				src/server/free_channel.c			\
-				src/server/free_data_msg.c			\
-				src/server/get_user_by_chan.c		\
-				src/server/main.c					\
-				src/server/parse_cmd.c				\
-				src/server/read_all_client.c		\
-				src/server/sock_io.c				\
-				src/server/update_write_poll.c		\
+				src/server/fnt/join.c						\
+				src/server/fnt/list.c						\
+				src/server/fnt/names.c						\
+				src/server/fnt/nick.c						\
+				src/server/fnt/part.c						\
+				src/server/fnt/privmsg.c					\
+				src/server/fnt/quit.c						\
+				src/server/fnt/user.c						\
+				src/server/accept_client.c					\
+				src/server/broadcast_channel.c				\
+				src/server/channel.c						\
+				src/server/channel_exist.c					\
+				src/server/client.c							\
+				src/server/close_empty_chan.c				\
+				src/server/create_server.c					\
+				src/server/data_send.c						\
+				src/server/exec_cmd.c						\
+				src/server/free_channel.c					\
+				src/server/free_data_msg.c					\
+				src/server/get_user_by_chan.c				\
+				src/server/main.c							\
+				src/server/parse_cmd.c						\
+				src/server/read_all_client.c				\
+				src/server/sock_io.c						\
+				src/server/update_write_poll.c				\
 				src/server/write_all_client.c
 
-SRC_CLIENT	=	src/common/is_positive_integer.c	\
-				src/common/poll_cond.c				\
-				src/common/poll_interact.c			\
-				src/common/poll_wait.c				\
-				src/common/malloc.c					\
-				src/client/core/cmd/action.c		\
-				src/client/core/cmd/server.c		\
-				src/client/core/cmd/nick.c			\
-				src/client/core/cmd/list.c			\
-				src/client/core/cmd/join.c			\
-				src/client/core/cmd/part.c			\
-				src/client/core/cmd/users.c			\
-				src/client/core/cmd/names.c			\
-				src/client/core/cmd/msg.c			\
-				src/client/core/cmd/accept_file.c	\
-				src/client/core/cmd/broadcast.c		\
-				src/client/core/sess/init.c			\
-				src/client/core/sess/event.c		\
-				src/client/core/sess/action.c		\
-				src/client/core/logger/init.c		\
-				src/client/core/logger/logger.c		\
-				src/client/ui/event.c				\
-				src/client/ui/init.c				\
-				src/client/ui/update.c				\
-				src/client/ui/wchat.c				\
-				src/client/ui/wchan.c				\
-				src/client/ui/winfo.c				\
-				src/client/ui/wlogs.c				\
-				src/client/ui/window.c				\
-				src/client/sighandler.c				\
+SRC_CLIENT	=	src/common/is_positive_integer.c			\
+				src/common/poll_cond.c						\
+				src/common/poll_interact.c					\
+				src/common/poll_wait.c						\
+				src/common/malloc.c							\
+				src/client/core/cmd/action.c				\
+				src/client/core/cmd/server.c				\
+				src/client/core/cmd/nick.c					\
+				src/client/core/cmd/list.c					\
+				src/client/core/cmd/join.c					\
+				src/client/core/cmd/part.c					\
+				src/client/core/cmd/users.c					\
+				src/client/core/cmd/names.c					\
+				src/client/core/cmd/msg.c					\
+				src/client/core/cmd/accept_file.c			\
+				src/client/core/cmd/broadcast.c				\
+				src/client/core/sess/init.c					\
+				src/client/core/sess/event.c				\
+				src/client/core/sess/action.c				\
+				src/client/core/logger/init.c				\
+				src/client/core/logger/logger.c				\
+				src/client/core/commander/init.c			\
+				src/client/core/commander/commander.c		\
+				src/client/ui/event.c						\
+				src/client/ui/init.c						\
+				src/client/ui/update.c						\
+				src/client/ui/wchat.c						\
+				src/client/ui/wchan.c						\
+				src/client/ui/winfo.c						\
+				src/client/ui/wlogs.c						\
+				src/client/ui/window.c						\
+				src/client/sighandler.c						\
 				src/client/main.c
 
 OBJ_SERVER	=	$(SRC_SERVER:.c=.o)
@@ -86,7 +88,7 @@ NAME_SERVER	=	server
 
 NAME_CLIENT	=	client
 
-CFLAGS		=	-Iinclude -W -Wall -Wextra -g
+CFLAGS		=	-Iinclude -W -Wall -Wextra -g -D _GNU_SOURCE
 
 LDFLAGS		=	-lncurses
 
