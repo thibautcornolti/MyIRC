@@ -15,7 +15,7 @@ sess_t *create_sess()
 	sess->free = &free_sess;
 	poll_add(&sess->pl, 0, POLLIN);
 	sess->serv = create_serv();
-	sess->logger = create_logger();	
+	sess->logger = create_logger();
 	sess->nickname = strdup(getlogin());
 	return (sess);
 }
@@ -37,6 +37,9 @@ serv_t *create_serv()
 	serv->buffer_size = 10240;
 	serv->buffer = safe_malloc(serv->buffer_size + 1);
 	serv->commander = create_commander();
+	serv->commander->push(serv->commander, "USER %s 127.0.0.1 server %s",
+		getlogin(), getlogin());
+	serv->commander->push(serv->commander, "NICK %s", getlogin());
 	return (serv);
 }
 
