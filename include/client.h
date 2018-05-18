@@ -86,6 +86,7 @@ typedef struct serv_s {
 
 	char *buffer;
 	char buffer_last;
+	int buffer_last_nb;	
 	size_t buffer_idx;
 	size_t buffer_size;
 } serv_t;
