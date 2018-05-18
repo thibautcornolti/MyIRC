@@ -9,7 +9,6 @@
 
 bool cmd_msg(sess_t *sess, char *line)
 {
-	(void) sess;
-	(void) line;
+	sess->serv->commander->push(sess->serv->commander, "PRIVMSG %s", line);
 	return (true);
 }
