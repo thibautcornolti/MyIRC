@@ -31,6 +31,17 @@ void process_event_serv(ui_t *this)
 		serv->buffer_idx = 0;
 		memset(serv->buffer, 0, serv->buffer_size);
 	}
-	this->w_info->update(this->w_info);
-	this->w_logs->update(this->w_logs);
+}
+
+void send_event_serv(ui_t *this)
+{
+	serv_t *serv = this->session->serv;
+
+	dprintf("size: %d\n", serv->commander->size(serv->commander));
+	if (serv->commander->size(serv->commander)) {
+		dprintf(serv->fd, "%s\r\n",
+			serv->commander->pop(serv->commander));
+		this->w_info->update(this->w_info);
+		this->w_logs->update(this->w_logs);
+	}
 }

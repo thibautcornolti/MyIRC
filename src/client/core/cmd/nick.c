@@ -32,8 +32,7 @@ bool cmd_nick(sess_t *sess, char *line)
 	else
 		sess->nickname = strdup(getlogin());
 	free(new_nickname);
-	if (sess->serv->connected)
-		sess->serv->commander->push(
-			sess->serv->commander, "NICK %s\r\n", sess->nickname);
+	sess->serv->commander->push(
+		sess->serv->commander, "NICK %s", sess->nickname);
 	return (true);
 }

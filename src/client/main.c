@@ -25,6 +25,13 @@ static void run()
 			ui->getServerEvent(ui);
 			ui->processServerEvent(ui);
 		}
+		if (ui->session->serv->connected &&
+			ui->session->serv->commander->size(
+				ui->session->serv->commander) &&
+			poll_canwrite(
+				ui->session->pl, ui->session->serv->fd)) {
+			ui->processServerEvent(ui);
+		}
 	}
 	ui->free(ui);
 }

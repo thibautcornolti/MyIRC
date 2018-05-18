@@ -30,7 +30,6 @@ bool push_commander(commander_t *this, char *cmd, ...)
 	else
 		res = false;
 	va_end(ap);
-	dprintf(2, "res: %d\n", res);
 	return (res);
 }
 
