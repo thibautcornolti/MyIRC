@@ -21,6 +21,7 @@ ui_t *create_ui()
 	ui->freeWindows = &free_windows;
 	ui->getServerEvent = &get_event_serv;
 	ui->processServerEvent = &process_event_serv;
+	ui->sendServerEvent = &send_event_serv;
 	ui->framecap = 70000;
 	ui->hasToQuit = false;
 	ui->buffer_size = 1025;
@@ -51,7 +52,7 @@ void init_ui(ui_t *this)
 void free_ui(ui_t *this)
 {
 	this->freeWindows(this);
-	endwin();	
+	endwin();
 	this->session->free(this->session);
 	free(this->buffer);
 	free(this);

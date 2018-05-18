@@ -74,7 +74,7 @@ bool cmd_server(sess_t *sess, char *line)
 	} else {
 		sess->serv->connected = true;
 		sess->logger->log(sess->logger, "Connected!");
-		poll_add(&sess->pl, sess->serv->fd, POLLIN);
+		poll_add(&sess->pl, sess->serv->fd, POLLIN | POLLOUT);
 	}
 	free(host);
 	return (res);

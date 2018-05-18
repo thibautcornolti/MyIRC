@@ -20,6 +20,8 @@ static void run()
 			ui->getEvent(ui);
 			ui->processEvent(ui);
 		}
+		if (poll_isclose(ui->session->pl, ui->session->serv->fd))
+			ui->session->serv->connected = false;
 		if (ui->session->serv->connected &&
 			poll_canread(ui->session->pl, ui->session->serv->fd)) {
 			ui->getServerEvent(ui);
@@ -30,7 +32,7 @@ static void run()
 				ui->session->serv->commander) &&
 			poll_canwrite(
 				ui->session->pl, ui->session->serv->fd)) {
-			ui->processServerEvent(ui);
+			ui->sendServerEvent(ui);
 		}
 	}
 	ui->free(ui);

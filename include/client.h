@@ -146,6 +146,7 @@ typedef struct ui_s {
 	void (*freeWindows)(struct ui_s *);
 	bool (*getServerEvent)(struct ui_s *);
 	void (*processServerEvent)(struct ui_s *);
+	void (*sendServerEvent)(struct ui_s *);
 
 	win_t *w_chat;
 	win_t *w_chan;
@@ -172,6 +173,7 @@ void init_windows(ui_t *);
 void free_windows(ui_t *);
 bool get_event_serv(ui_t *);
 void process_event_serv(ui_t *);
+void send_event_serv(ui_t *);
 
 win_t *create_window(ui_t *, void (*)(win_t *));
 void init_window(win_t *);
