@@ -57,7 +57,7 @@ static int get_port(char *line)
 	return (res);
 }
 
-bool cmd_server(sess_t *sess, char *line)
+bool cmd_server(sess_t *sess, char *line) //TODO Coding Style
 {
 	bool res = true;
 	char *host = get_host(line);
@@ -67,13 +67,15 @@ bool cmd_server(sess_t *sess, char *line)
 	sess->serv->connected = false;
 	sess->serv->host = strdup(host);
 	sess->serv->port = port;
-	if (!cmd_server_init(sess->serv) || !cmd_server_connect(sess->serv, host, port)) {
+	if (!cmd_server_init(sess->serv) || !cmd_server_connect(sess->serv,
+	host, port)) {
 		if (errno)
-			sess->logger->log(sess->logger, strerror(errno));
+			sess->chan->logger->log(sess->chan->logger, strerror
+			(errno));
 		res = false;
 	} else {
 		sess->serv->connected = true;
-		sess->logger->log(sess->logger, "Connected!");
+		sess->chan->logger->log(sess->chan->logger, "Connected!");
 		poll_add(&sess->pl, sess->serv->fd, POLLIN | POLLOUT);
 	}
 	free(host);

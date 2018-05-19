@@ -51,6 +51,9 @@ SRC_CLIENT	=	src/common/is_positive_integer.c			\
 				src/common/poll_interact.c					\
 				src/common/poll_wait.c						\
 				src/common/malloc.c							\
+				src/client/core/channel/add_chan.c			\
+				src/client/core/channel/free_chan.c			\
+				src/client/core/channel/push_log.c			\
 				src/client/core/cmd/action.c				\
 				src/client/core/cmd/server.c				\
 				src/client/core/cmd/nick.c					\
@@ -91,7 +94,6 @@ NAME_CLIENT	=	client
 CFLAGS		=	-Iinclude -W -Wall -Wextra -g -D _GNU_SOURCE
 
 LDFLAGS		=	-lncurses
-
 
 all:			$(NAME_SERVER) $(NAME_CLIENT)
 

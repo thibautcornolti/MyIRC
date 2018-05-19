@@ -10,14 +10,14 @@
 static void update_w_logs_show(win_t *this)
 {
 	struct tm *tm;
+	logger_t *log = this->ui->session->cur_chan->logger;
 	int start;
 
-	start = ((int)this->ui->session->logger->size > LINES - 9) ?
-		this->ui->session->logger->size - (LINES - 8) :
-		0;
-	for (size_t i = start; i < this->ui->session->logger->size; ++i) {
+	start = ((int)log->size > LINES - 9) ?
+		log->size - (LINES - 8) : 0;
+	for (size_t i = start; i < log->size; ++i) {
 		if (!(tm = localtime(
-			      &this->ui->session->logger->logs[i].timestamp)))
+			      &log->logs[i].timestamp)))
 			continue;
 		wattron(this->ncurses_win, A_ITALIC);
 		mvwprintw(this->ncurses_win, i + 2 - start, 2,
@@ -27,7 +27,7 @@ static void update_w_logs_show(win_t *this)
 		mvwprintw(this->ncurses_win, i + 2 - start, 11, "|");
 		wattroff(this->ncurses_win, A_BOLD);
 		mvwprintw(this->ncurses_win, i + 2 - start, 14, "%s",
-			this->ui->session->logger->logs[i].msg);
+			log->logs[i].msg);
 	}
 }
 

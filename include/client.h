@@ -96,17 +96,31 @@ void free_serv(serv_t *);
 
 bool do_srv(struct ui_s *);
 
+typedef struct chan_s chan_t;
+
 typedef struct sess_s {
 	void (*free)(struct sess_s *);
 
 	serv_t *serv;
-	logger_t *logger;
+	chan_t *chan;
+	chan_t *cur_chan;
 	poll_t *pl;
 	char *nickname;
 } sess_t;
 
 sess_t *create_sess();
 void free_sess(sess_t *);
+
+struct chan_s {
+	logger_t *logger;
+	char *name;
+	bool update;
+	struct chan_s *next;
+};
+
+int add_chan(chan_t **chan, char *name);
+void push_log_in_chan(struct ui_s *this, char *name, char *log);
+void free_chan(struct sess_s *this);
 
 bool do_cmd(struct ui_s *);
 

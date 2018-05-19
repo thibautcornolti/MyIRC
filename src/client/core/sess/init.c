@@ -15,15 +15,16 @@ sess_t *create_sess()
 	sess->free = &free_sess;
 	poll_add(&sess->pl, 0, POLLIN);
 	sess->serv = create_serv();
-	sess->logger = create_logger();
+	add_chan(&sess->chan, "master");
+	sess->cur_chan = sess->chan;
 	sess->nickname = strdup(getlogin());
 	return (sess);
 }
 
 void free_sess(sess_t *this)
 {
-	this->serv->free(this->serv);
-	this->logger->free(this->logger);
+	this->serv->free(this->serv); //TODO free chan
+	free_chan(this);
 	free(this->nickname);
 	free(this);
 }

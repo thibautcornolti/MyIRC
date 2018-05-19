@@ -9,6 +9,6 @@
 
 bool do_srv(ui_t *ui)
 {
-	ui->session->logger->log(ui->session->logger, ui->session->serv->buffer);
+	push_log_in_chan(ui, "master", ui->session->serv->buffer);
 	return (true);
 }

@@ -19,7 +19,7 @@ static void wait_fd(ui_t *ui)
 	poll_wait(ui->session->pl, -1);
 }
 
-static void run()
+static void run() //TODO Coding style
 {
 	ui_t *ui = create_ui();
 

@@ -25,7 +25,7 @@ static int cmd_to_fctn(char *line)
 	size_t endcmd = 0;
 	int res = -1;
 
-	for (; line[endcmd] && line[endcmd] != ' ' ; ++endcmd);
+	for (; line[endcmd] && line[endcmd] != ' '; ++endcmd);
 	cmd = strndup(line, endcmd);
 	for (size_t i = 0 ; cmd[i] ; ++i)
 		cmd[i] = toupper(cmd[i]);
@@ -39,7 +39,6 @@ bool do_cmd(ui_t *ui)
 {
 	bool res = false;
 	int fctn = 0;
-
 
 	if (ui->buffer[0] != '/')
 		res = cmd_broadcast(ui->session, ui->buffer);
