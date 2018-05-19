@@ -50,7 +50,10 @@ SRC_CLIENT	=	src/common/is_positive_integer.c			\
 				src/common/poll_cond.c						\
 				src/common/poll_interact.c					\
 				src/common/poll_wait.c						\
+				src/common/len_array.c						\
+				src/common/split_cmd.c						\
 				src/common/malloc.c							\
+				src/common/str_tolower.c					\
 				src/client/core/channel/add_chan.c			\
 				src/client/core/channel/free_chan.c			\
 				src/client/core/channel/push_log.c			\
@@ -70,6 +73,10 @@ SRC_CLIENT	=	src/common/is_positive_integer.c			\
 				src/client/core/sess/action.c				\
 				src/client/core/logger/init.c				\
 				src/client/core/logger/logger.c				\
+				src/client/core/resp/join.c					\
+				src/client/core/resp/list.c					\
+				src/client/core/resp/no_action.c			\
+				src/client/core/resp/privmsg.c				\
 				src/client/core/commander/init.c			\
 				src/client/core/commander/commander.c		\
 				src/client/ui/event.c						\

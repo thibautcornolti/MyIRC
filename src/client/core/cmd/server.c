@@ -13,9 +13,12 @@ static bool cmd_server_connect(serv_t *serv, char *ip, int port)
 	int ret = 1;
 
 	if (server) {
-		serv->s_in.sin_family = AF_INET;
 		memcpy(server->h_addr, &serv->s_in.sin_addr.s_addr,
 			server->h_length);
+//		memset(&serv->s_in, 0, sizeof(serv->s_in));
+		dprintf(2, "IP: %s\n", ip);
+//		inet_pton(AF_INET, ip, &serv->s_in.sin_addr);
+		serv->s_in.sin_family = AF_INET;
 		serv->s_in.sin_port = htons(port);
 		ret = connect(serv->fd, (struct sockaddr *)&serv->s_in,
 			sizeof(serv->s_in));
