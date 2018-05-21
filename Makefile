@@ -87,6 +87,7 @@ SRC_CLIENT	=	src/common/sendf/data_sendf.c				\
 				src/client/core/resp/names.c				\
 				src/client/core/resp/no_action.c			\
 				src/client/core/resp/part.c					\
+				src/client/core/resp/pretty_size.c			\
 				src/client/core/resp/privmsg.c				\
 				src/client/core/commander/init.c			\
 				src/client/core/commander/commander.c		\
