@@ -121,11 +121,24 @@ typedef struct sess_s {
 sess_t *create_sess();
 int add_chan(sess_t *, char *);
 int rm_chan(sess_t *, char *);
-void free_sess(sess_t *);
-
 void printf_chan(struct sess_s *this, char *name, char *model, ...);
 void print_chan(struct sess_s *this, char *name, char *log);
 void free_chan(struct sess_s *this);
+void free_sess(sess_t *);
+
+typedef struct {
+	char *name;
+	void (*fnt)(ui_t *, char **);
+} list_cmd_action_t;
+
+char *get_nickname(char *domaine);
+void resp_no_action(ui_t *ui, char **resp);
+void resp_privmsg(ui_t *this, char **resp);
+void resp_join(ui_t *ui, char **resp);
+void resp_names(ui_t *ui, char **resp);
+void resp_part(ui_t *this, char **resp);
+void resp_list(ui_t *this, char **list);
+void resp_end_list(ui_t *this, char **list);
 
 bool do_cmd(struct ui_s *);
 
@@ -205,17 +218,3 @@ void update_w_info(win_t *);
 void update_w_logs(win_t *);
 
 ui_t *set_master_ui(ui_t *);
-
-typedef struct {
-	char *name;
-	void (*fnt)(ui_t *, char **);
-} list_cmd_action_t;
-
-char *get_nickname(char *domaine);
-void resp_no_action(ui_t *ui, char **resp);
-void resp_privmsg(ui_t *this, char **resp);
-void resp_join(ui_t *ui, char **resp);
-void resp_names(ui_t *ui, char **resp);
-void resp_part(ui_t *this, char **resp);
-void resp_list(ui_t *this, char **list);
-void resp_end_list(ui_t *this, char **list);
