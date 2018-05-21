@@ -9,7 +9,6 @@
 
 bool cmd_users(sess_t *sess, char *line)
 {
-	(void) sess;
-	(void) line;
+	sess->serv->commander->push(sess->serv->commander, "USERS %s", line);
 	return (true);
 }

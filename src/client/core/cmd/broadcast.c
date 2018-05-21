@@ -7,16 +7,15 @@
 
 #include "client.h"
 
-bool cmd_broadcast(ui_t *ui, char *line)
+bool cmd_broadcast(sess_t *sess, char *line)
 {
-	if (!strcmp(ui->session->cur_chan->name, "master")) {
-		ui->session->printfChan(
-			ui->session, "master", "You cannot speak here");
+	if (!strcmp(sess->cur_chan->name, "master")) {
+		sess->printfChan(sess, "master", "You cannot speak here");
 		return (true);
 	}
-	ui->session->printfChan(ui->session, ui->session->cur_chan->name,
-		"%s: %s", ui->session->nickname, line);
-	ui->session->serv->commander->push(ui->session->serv->commander,
-		"PRIVMSG %s :%s", ui->session->cur_chan->name, line);
+	sess->printfChan(
+		sess, sess->cur_chan->name, "%s: %s", sess->nickname, line);
+	sess->serv->commander->push(sess->serv->commander, "PRIVMSG %s :%s",
+		sess->cur_chan->name, line);
 	return (true);
 }

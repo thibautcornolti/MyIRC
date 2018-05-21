@@ -41,7 +41,7 @@ bool do_cmd(ui_t *ui)
 	int fctn = 0;
 
 	if (ui->buffer[0] != '/')
-		res = cmd_broadcast(ui, ui->buffer);
+		res = cmd_broadcast(ui->session, ui->buffer);
 	else if ((fctn = cmd_to_fctn(ui->buffer + 1)) >= 0)
 		res = fcts[fctn](
 			ui->session, ui->buffer + strlen(refs[fctn]) + 2);

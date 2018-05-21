@@ -137,7 +137,7 @@ bool cmd_users(struct sess_s *, char *);
 bool cmd_names(struct sess_s *, char *);
 bool cmd_msg(struct sess_s *, char *);
 bool cmd_accept_file(struct sess_s *, char *);
-bool cmd_broadcast(struct ui_s *, char *);
+bool cmd_broadcast(struct sess_s *, char *);
 
 /*
 ** User Interface
