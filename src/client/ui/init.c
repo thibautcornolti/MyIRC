@@ -7,7 +7,7 @@
 
 #include "client.h"
 
-ui_t *create_ui() //TODO Coding Style
+ui_t *create_ui() // TODO Coding Style
 {
 	ui_t *ui;
 
@@ -46,8 +46,8 @@ void init_ui(ui_t *this)
 	fcntl(0, F_SETFL, flags | O_NONBLOCK);
 	this->initWindows(this);
 	init_pair(1, COLOR_RED, COLOR_BLACK);
-	push_log_in_chan(this, "master",
-	"Welcome to my IRC client!");
+	this->session->printChan(
+		this->session, "master", "Welcome to my IRC client!");
 }
 
 void free_ui(ui_t *this)

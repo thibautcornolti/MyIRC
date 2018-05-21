@@ -86,7 +86,7 @@ typedef struct serv_s {
 
 	char *buffer;
 	char buffer_last;
-	int buffer_last_nb;	
+	int buffer_last_nb;
 	size_t buffer_idx;
 	size_t buffer_size;
 } serv_t;
@@ -96,10 +96,20 @@ void free_serv(serv_t *);
 
 bool do_srv(struct ui_s *);
 
-typedef struct chan_s chan_t;
+typedef struct chan_s {
+	logger_t *logger;
+	char *name;
+	bool update;
+	struct chan_s *next;
+} chan_t;
 
 typedef struct sess_s {
+	int (*addChan)(struct sess_s *, char *);
+	int (*rmChan)(struct sess_s *, char *);
+	void (*printChan)(struct sess_s *, char *, char *);
+	void (*printfChan)(struct sess_s *, char *, char *, ...);
 	void (*free)(struct sess_s *);
+	void (*_freeChan)(struct sess_s *);
 
 	serv_t *serv;
 	chan_t *chan;
@@ -109,19 +119,12 @@ typedef struct sess_s {
 } sess_t;
 
 sess_t *create_sess();
+int add_chan(sess_t *, char *);
+int rm_chan(sess_t *, char *);
 void free_sess(sess_t *);
 
-typedef struct chan_s {
-	logger_t *logger;
-	char *name;
-	bool update;
-	struct chan_s *next;
-} chan_t;
-
-int add_chan(chan_t **chan, char *name);
-int rm_chan(chan_t **c, char *name);
-void push_log_chanf(struct ui_s *this, char *name, char *model, ...);
-void push_log_in_chan(struct ui_s *this, char *name, char *log);
+void printf_chan(struct sess_s *this, char *name, char *model, ...);
+void print_chan(struct sess_s *this, char *name, char *log);
 void free_chan(struct sess_s *this);
 
 bool do_cmd(struct ui_s *);

@@ -37,6 +37,7 @@ void process_event_serv(ui_t *this)
 		serv->connected = false;
 	this->w_info->update(this->w_info);
 	this->w_logs->update(this->w_logs);
+	this->w_chan->update(this->w_chan);
 }
 
 void send_event_serv(ui_t *this)

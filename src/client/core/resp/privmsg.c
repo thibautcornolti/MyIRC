@@ -17,7 +17,7 @@ static void treat_msg_channel(ui_t *this, char **resp, char *nick)
 	memcpy(tmp + strlen(nick), ": ", 2);
 	memcpy(tmp + strlen(nick) + 2, resp[3], strlen(resp[3]));
 	tmp[strlen(nick) + 2 + strlen(resp[3])] = '\0';
-	push_log_in_chan(this, (resp[2][0] == '#') ? resp[2] : nick, tmp);
+	this->session->printChan(this->session, (resp[2][0] == '#') ? resp[2] : nick, tmp);
 	free(tmp);
 }
 

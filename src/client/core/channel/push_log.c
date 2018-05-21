@@ -7,9 +7,9 @@
 
 #include "client.h"
 
-static int is_chan_exist(ui_t *this, char *name)
+static int is_chan_exist(sess_t *this, char *name)
 {
-	chan_t *chan = this->session->chan;
+	chan_t *chan = this->chan;
 
 	while (chan) {
 		if (!strcmp(chan->name, name))
@@ -19,22 +19,21 @@ static int is_chan_exist(ui_t *this, char *name)
 	return (0);
 }
 
-void push_log_chanf(ui_t *this, char *name, char *model, ...)
+void printf_chan(sess_t *this, char *name, char *model, ...)
 {
 	char *msg;
-	chan_t *chan = this->session->chan;
+	chan_t *chan = this->chan;
 	va_list list;
 
 	va_start(list, model);
 	msg = sendf(model, list);
 	if (!is_chan_exist(this, name))
-		add_chan(&this->session->chan, name);
+		this->addChan(this, name);
 	while (chan) {
 		if (!strcmp(chan->name, name)) {
 			chan->logger->log(chan->logger, msg);
-			if (chan != this->session->cur_chan)
+			if (chan != this->cur_chan)
 				chan->update = true;
-			this->w_chan->update(this->w_chan);
 			return;
 		}
 		chan = chan->next;
@@ -42,18 +41,17 @@ void push_log_chanf(ui_t *this, char *name, char *model, ...)
 	va_end(list);
 }
 
-void push_log_in_chan(ui_t *this, char *name, char *msg)
+void print_chan(sess_t *this, char *name, char *msg)
 {
-	chan_t *chan = this->session->chan;
+	chan_t *chan = this->chan;
 
 	if (!is_chan_exist(this, name))
-		add_chan(&this->session->chan, name);
+		this->addChan(this, name);
 	while (chan) {
 		if (!strcmp(chan->name, name)) {
 			chan->logger->log(chan->logger, msg);
-			if (chan != this->session->cur_chan)
+			if (chan != this->cur_chan)
 				chan->update = true;
-			this->w_chan->update(this->w_chan);
 			return;
 		}
 		chan = chan->next;

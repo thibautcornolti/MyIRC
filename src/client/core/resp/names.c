@@ -17,6 +17,6 @@ void resp_names(ui_t *ui, char **resp)
 	strlen(resp[5]) + 1));
 	memcpy(tmp, "Users: ", strlen("Users: "));
 	memcpy(tmp + strlen("Users: "), resp[5], strlen(resp[5]));
-	push_log_in_chan(ui, resp[4], tmp);
+	ui->session->printChan(ui->session, resp[4], tmp);
 	free(tmp);
 }

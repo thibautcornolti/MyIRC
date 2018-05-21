@@ -12,10 +12,15 @@ sess_t *create_sess()
 	sess_t *sess;
 
 	sess = safe_malloc(sizeof(sess_t));
+	sess->addChan = &add_chan;
+	sess->rmChan = &rm_chan;
+	sess->printfChan = &printf_chan;
+	sess->printChan = &print_chan;
+	sess->_freeChan = &free_chan;
 	sess->free = &free_sess;
 	poll_add(&sess->pl, 0, POLLIN);
 	sess->serv = create_serv();
-	add_chan(&sess->chan, "master");
+	sess->addChan(sess, "master");
 	sess->cur_chan = sess->chan;
 	sess->nickname = strdup(getlogin());
 	return (sess);
@@ -23,8 +28,8 @@ sess_t *create_sess()
 
 void free_sess(sess_t *this)
 {
-	this->serv->free(this->serv); //TODO free chan
-	free_chan(this);
+	this->serv->free(this->serv);
+	this->_freeChan(this);
 	free(this->nickname);
 	free(this);
 }
