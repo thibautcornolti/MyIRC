@@ -26,7 +26,7 @@ void nick_cmd(server_t *server, client_t *cli, cmd_t *cmd)
 		return;
 	}
 	if (already_taken(server->clients, cmd->args[0])) {
-		msg_sendf(&cli->to_send, ":%s 443 %s %s :%s\r\n",
+		msg_sendf(&cli->to_send, ":%s 433 %s %s :%s\r\n",
 		"localhost", (cli->nickname) ? cli->nickname : "*",
 		cmd->args[0], "Nickname is already in use");
 		return;

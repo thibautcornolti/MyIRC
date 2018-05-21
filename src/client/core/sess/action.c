@@ -11,8 +11,11 @@
 list_cmd_action_t cmd[] = {
 	{"PRIVMSG", &resp_privmsg},
 	{"JOIN", &resp_join},
-	{"353", &resp_list},
+	{"PART", &resp_part},
+	{"353", &resp_names},
 	{"366", &resp_no_action},
+	{"322", &resp_list},
+	{"323", &resp_end_list},
 	{NULL, NULL}
 };
 
@@ -24,20 +27,20 @@ bool do_srv(ui_t *ui)
 
 	if (!resp)
 		return (false); //TODO Ask tibo about the return false consequence
+	dprintf(2, "DO_SRV: %s\n", msg); //TODO rm debug
+	while (resp[i]) {
+		dprintf(2, "[%lu] = %s\n", i, resp[i]);
+		i += 1;
+	}
 	if (len_array((void **) resp) < 3)
 		return (false);
 	str_toupper(resp[1]);
+	i = 0;
 	while (cmd[i].name) {
 		if (!strcmp(cmd[i].name, resp[1])) {
 			cmd[i].fnt(ui, resp);
 			return (true);
 		}
-		i += 1;
-	}
-	dprintf(2, "DO_SRV: %s\n", msg);
-	i = 0;
-	while (resp[i]) {
-		dprintf(2, "[%lu] = %s\n", i, resp[i]);
 		i += 1;
 	}
 	push_log_in_chan(ui, "master", resp[len_array((void **) resp) - 1]);

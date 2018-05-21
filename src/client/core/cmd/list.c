@@ -11,5 +11,6 @@ bool cmd_list(sess_t *sess, char *line)
 {
 	(void) sess;
 	(void) line;
+	sess->serv->commander->push(sess->serv->commander, "LIST %s", line);
 	return (true);
 }

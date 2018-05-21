@@ -9,9 +9,16 @@
 
 void resp_join(ui_t *ui, char **resp)
 {
+	char *nick = get_nickname(resp[0]);
 	chan_t *chan_cpy = ui->session->chan;
 
-	push_log_in_chan(ui, resp[2], "Vous avez rejoint le channel");
+	if (!nick)
+		return;
+	if (!strcmp(ui->session->nickname, nick))
+		push_log_in_chan(ui, resp[2], "You have joined this channel");
+	else
+		push_log_chanf(ui, resp[2], "%s has joined this channel",
+		nick);
 	while (chan_cpy) {
 		if (!strcmp(chan_cpy->name, resp[2])) {
 			ui->session->cur_chan = chan_cpy;

@@ -5,7 +5,12 @@
 ## main.c
 ##
 
-SRC_SERVER	=	src/common/free_array.c						\
+SRC_SERVER	=	src/common/sendf/data_sendf.c				\
+				src/common/sendf/place_char.c				\
+				src/common/sendf/place_int.c				\
+				src/common/sendf/place_str.c				\
+				src/common/sendf/place_unsigned_int.c		\
+				src/common/free_array.c						\
 				src/common/is_positive_integer.c			\
 				src/common/len_array.c						\
 				src/common/poll_cond.c						\
@@ -15,10 +20,6 @@ SRC_SERVER	=	src/common/free_array.c						\
 				src/common/split_str.c						\
 				src/common/str_tolower.c					\
 				src/server/data_sendf/data_sendf.c			\
-				src/server/data_sendf/place_char.c			\
-				src/server/data_sendf/place_int.c			\
-				src/server/data_sendf/place_str.c			\
-				src/server/data_sendf/place_unsigned_int.c	\
 				src/server/fnt/join.c						\
 				src/server/fnt/list.c						\
 				src/server/fnt/names.c						\
@@ -46,7 +47,13 @@ SRC_SERVER	=	src/common/free_array.c						\
 				src/server/update_write_poll.c				\
 				src/server/write_all_client.c
 
-SRC_CLIENT	=	src/common/is_positive_integer.c			\
+SRC_CLIENT	=	src/common/sendf/data_sendf.c				\
+				src/common/sendf/place_char.c				\
+				src/common/sendf/place_int.c				\
+				src/common/sendf/place_str.c				\
+				src/common/sendf/place_unsigned_int.c		\
+				src/common/free_array.c						\
+				src/common/is_positive_integer.c			\
 				src/common/poll_cond.c						\
 				src/common/poll_interact.c					\
 				src/common/poll_wait.c						\
@@ -57,6 +64,7 @@ SRC_CLIENT	=	src/common/is_positive_integer.c			\
 				src/client/core/channel/add_chan.c			\
 				src/client/core/channel/free_chan.c			\
 				src/client/core/channel/push_log.c			\
+				src/client/core/channel/rm_chan.c			\
 				src/client/core/cmd/action.c				\
 				src/client/core/cmd/server.c				\
 				src/client/core/cmd/nick.c					\
@@ -73,9 +81,12 @@ SRC_CLIENT	=	src/common/is_positive_integer.c			\
 				src/client/core/sess/action.c				\
 				src/client/core/logger/init.c				\
 				src/client/core/logger/logger.c				\
+				src/client/core/resp/get_nickname.c			\
 				src/client/core/resp/join.c					\
 				src/client/core/resp/list.c					\
+				src/client/core/resp/names.c				\
 				src/client/core/resp/no_action.c			\
+				src/client/core/resp/part.c					\
 				src/client/core/resp/privmsg.c				\
 				src/client/core/commander/init.c			\
 				src/client/core/commander/commander.c		\

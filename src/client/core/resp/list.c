@@ -7,16 +7,15 @@
 
 #include "client.h"
 
-void resp_list(ui_t *ui, char **resp)
+void resp_end_list(ui_t *this, char **list)
 {
-	char *tmp;
+	(void) list;
+	push_log_in_chan(this, "master", "End of channel list");
+}
 
-	if (len_array((void **) resp) < 6)
+void resp_list(ui_t *this, char **list)
+{
+	if (len_array((void **) list) < 5)
 		return;
-	tmp = safe_malloc(sizeof(char) * (strlen("Users: ") +
-	strlen(resp[5]) + 1));
-	memcpy(tmp, "Users: ", strlen("Users: "));
-	memcpy(tmp + strlen("Users: "), resp[5], strlen(resp[5]));
-	push_log_in_chan(ui, resp[4], tmp);
-	free(tmp);
+	push_log_chanf(this, "master", "%s (%s user(s))", list[3], list[4]);
 }

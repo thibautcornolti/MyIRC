@@ -7,15 +7,6 @@
 
 #include "client.h"
 
-static char *get_nickname(char *domaine)
-{
-	size_t idx = 0;
-
-	while (domaine[idx] && strncmp(domaine + idx, "!~", 2) != 0)
-		idx += 1;
-	return strndup(domaine, idx);
-}
-
 static void treat_msg_channel(ui_t *this, char **resp, char *nick)
 {
 	char *tmp;

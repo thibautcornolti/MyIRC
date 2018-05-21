@@ -119,6 +119,8 @@ typedef struct chan_s {
 } chan_t;
 
 int add_chan(chan_t **chan, char *name);
+int rm_chan(chan_t **c, char *name);
+void push_log_chanf(struct ui_s *this, char *name, char *model, ...);
 void push_log_in_chan(struct ui_s *this, char *name, char *log);
 void free_chan(struct sess_s *this);
 
@@ -133,7 +135,7 @@ bool cmd_users(struct sess_s *, char *);
 bool cmd_names(struct sess_s *, char *);
 bool cmd_msg(struct sess_s *, char *);
 bool cmd_accept_file(struct sess_s *, char *);
-bool cmd_broadcast(struct sess_s *, char *);
+bool cmd_broadcast(struct ui_s *, char *);
 
 /*
 ** User Interface
@@ -206,7 +208,11 @@ typedef struct {
 	void (*fnt)(ui_t *, char **);
 } list_cmd_action_t;
 
+char *get_nickname(char *domaine);
 void resp_no_action(ui_t *ui, char **resp);
 void resp_privmsg(ui_t *this, char **resp);
 void resp_join(ui_t *ui, char **resp);
-void resp_list(ui_t *ui, char **resp);
+void resp_names(ui_t *ui, char **resp);
+void resp_part(ui_t *this, char **resp);
+void resp_list(ui_t *this, char **list);
+void resp_end_list(ui_t *this, char **list);
