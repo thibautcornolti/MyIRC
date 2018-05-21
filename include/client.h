@@ -208,6 +208,11 @@ typedef struct {
 	void (*fnt)(ui_t *, char **);
 } list_cmd_action_t;
 
+typedef union {
+	uint32_t val;
+	char digit[4];
+} ip_t;
+
 char *get_nickname(char *domaine);
 void resp_no_action(ui_t *ui, char **resp);
 void resp_privmsg(ui_t *this, char **resp);
@@ -216,3 +221,5 @@ void resp_names(ui_t *ui, char **resp);
 void resp_part(ui_t *this, char **resp);
 void resp_list(ui_t *this, char **list);
 void resp_end_list(ui_t *this, char **list);
+
+char *pretty_size(char *size_c);

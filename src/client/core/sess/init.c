@@ -23,7 +23,7 @@ sess_t *create_sess()
 
 void free_sess(sess_t *this)
 {
-	this->serv->free(this->serv); //TODO free chan
+	this->serv->free(this->serv);
 	free_chan(this);
 	free(this->nickname);
 	free(this);

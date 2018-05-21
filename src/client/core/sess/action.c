@@ -26,7 +26,7 @@ bool do_srv(ui_t *ui)
 	size_t i = 0;
 
 	if (!resp)
-		return (false); //TODO Ask tibo about the return false consequence
+		return (false);
 	dprintf(2, "DO_SRV: %s\n", msg); //TODO rm debug
 	while (resp[i]) {
 		dprintf(2, "[%lu] = %s\n", i, resp[i]);
