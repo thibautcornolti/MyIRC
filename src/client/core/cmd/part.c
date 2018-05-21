@@ -13,12 +13,17 @@ bool cmd_part(sess_t *sess, char *line)
 
 	if (!cmd)
 		return (false);
-	if (len_array((void **) cmd) == 1)
+	if (len_array((void **)cmd) == 1 && strlen(cmd[0]))
+		sess->serv->commander->push(
+			sess->serv->commander, "PART %s", cmd[0]);
+	else if (len_array((void **)cmd) >= 2)
+		sess->serv->commander->push(
+			sess->serv->commander, "PART %s :%s", cmd[0], cmd[1]);
+	else if (strcmp(sess->cur_chan->name, "master"))
 		sess->serv->commander->push(sess->serv->commander, "PART %s",
-		cmd[0]);
-	else if (len_array((void **) cmd) >= 2)
-		sess->serv->commander->push(sess->serv->commander,
-		"PART %s :%s", cmd[0], cmd[1]);
-	free_array((void **) cmd);
+			sess->cur_chan->name);
+	else
+		sess->printChan(sess, "master", "You cannot leave master");
+	free_array((void **)cmd);
 	return (true);
 }
