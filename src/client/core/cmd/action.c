@@ -9,14 +9,14 @@
 
 static const char *refs[] = {
 	"SERVER", "NICK", "LIST", "JOIN",
-	"PART", "USERS", "NAMES", "MSG",
+	"PART", "USERS", "NAMES", "MSG", "SEND_FILE",
 	"ACCEPT_FILE", NULL,
 };
 
 static bool (*fcts[])(sess_t *, char *) = {
 	&cmd_server, &cmd_nick, &cmd_list,
 	&cmd_join, &cmd_part, &cmd_users,
-	&cmd_names, &cmd_msg, &cmd_accept_file,
+	&cmd_names, &cmd_msg, &cmd_send_file, &cmd_accept_file,
 };
 
 static int cmd_to_fctn(char *line)

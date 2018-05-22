@@ -104,6 +104,28 @@ typedef struct chan_s {
 	struct chan_s *next;
 } chan_t;
 
+/*
+** Send file
+*/
+
+typedef struct send_serv_s {
+	int serv;
+	int client;
+	int fd_file;
+	char *file;
+} send_serv_t;
+
+typedef union {
+	uint32_t val;
+	char digit[4];
+} ip_t;
+
+typedef struct sess_s sess_t;
+
+bool send_file(sess_t *sess, int fd, char *nick, char *filename);
+int create_random_serv(uint16_t *port);
+ip_t convert_ip(int sock);
+
 typedef struct sess_s {
 	int (*addChan)(struct sess_s *, char *);
 	int (*rmChan)(struct sess_s *, char *);
@@ -117,6 +139,8 @@ typedef struct sess_s {
 	chan_t *chan;
 	chan_t *cur_chan;
 	poll_t *pl;
+	send_serv_t *send_serv;
+	size_t nb_send_serv;
 	char *nickname;
 } sess_t;
 
@@ -139,8 +163,11 @@ bool cmd_part(struct sess_s *, char *);
 bool cmd_users(struct sess_s *, char *);
 bool cmd_names(struct sess_s *, char *);
 bool cmd_msg(struct sess_s *, char *);
+bool cmd_send_file(sess_t *sess, char *line);
 bool cmd_accept_file(struct sess_s *, char *);
 bool cmd_broadcast(struct sess_s *, char *);
+
+char *get_ip_from_sock(int sock);
 
 /*
 ** User Interface
@@ -169,6 +196,7 @@ typedef struct ui_s {
 	bool (*getServerEvent)(struct ui_s *);
 	void (*processServerEvent)(struct ui_s *);
 	void (*sendServerEvent)(struct ui_s *);
+	void (*fileEvent)(struct ui_s *);
 
 	win_t *w_chat;
 	win_t *w_chan;
@@ -196,6 +224,7 @@ void free_windows(ui_t *);
 bool get_event_serv(ui_t *);
 void process_event_serv(ui_t *);
 void send_event_serv(ui_t *);
+void handle_send_serv(ui_t *);
 
 win_t *create_window(ui_t *, void (*)(win_t *));
 void init_window(win_t *);
@@ -213,11 +242,6 @@ typedef struct {
 	void (*fnt)(ui_t *, char **);
 } list_cmd_action_t;
 
-typedef union {
-	uint32_t val;
-	char digit[4];
-} ip_t;
-
 char *get_nickname(char *domaine);
 void resp_no_action(ui_t *ui, char **resp);
 void resp_privmsg(ui_t *this, char **resp);
@@ -231,3 +255,5 @@ char *pretty_size(char *size_c);
 char *get_host(char *line);
 char *get_port(char *line);
 void sig_handler(int);
+
+uint32_t swap_endian(uint32_t num);

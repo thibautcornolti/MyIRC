@@ -46,3 +46,5 @@ size_t len_array(void **arr);
 void str_toupper(char *str);
 
 char *sendf(const char *model, va_list list);
+
+char *asendf(char *model, ...);

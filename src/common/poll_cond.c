@@ -17,23 +17,19 @@ int poll_canread(poll_t *p, int fd)
 			return (0);
 		p = p->next;
 	}
-	return (1);
+	return (0);
 }
 
 int poll_canwrite(poll_t *p, int fd)
 {
 	while (p) {
-//		printf("FD: %d %d\n", p->fd, fd);
-//		if (p->fd == fd) {
-//			printf("LOL : %d %d %d\n", p->revt, POLLOUT, p);
-//		}
 		if (p->fd == fd && (POLLOUT & p->revt) != 0)
 			return (1);
 		else if (p->fd == fd)
 			return (0);
 		p = p->next;
 	}
-	return (1);
+	return (0);
 }
 
 int poll_isclose(poll_t *p, int fd)

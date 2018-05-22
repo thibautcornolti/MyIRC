@@ -43,12 +43,28 @@ static void run() //TODO Coding style
 				ui->session->pl, ui->session->serv->fd)) {
 			ui->sendServerEvent(ui);
 		}
+		ui->fileEvent(ui);
 	}
 	ui->free(ui);
 }
 
 int main()
 {
+//	char hostname[500]; //TODO rm debug
+//
+//	gethostname(hostname, 500);
+//	struct hostent *t = gethostbyname(hostname);
+//	int i = 0;
+//	printf("Name: %s\n", t->h_name);
+//	printf("Type: %d\n", t->h_addrtype);
+//	printf("Len: %d\n", t->h_length);
+//	while (t->h_addr_list[i]) {
+//		printf("[%d] : %d.%d.%d.%d\n", i, t->h_addr_list[i][0],
+//		t->h_addr_list[i][1], t->h_addr_list[i][2],
+//		       t->h_addr_list[i][3]);
+//		i ++;
+//	}
+//	return (0);
 	run();
 	return (EXIT_SUCCESS);
 }

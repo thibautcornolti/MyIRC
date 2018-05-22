@@ -47,7 +47,8 @@ SRC_SERVER	=	src/common/sendf/data_sendf.c				\
 				src/server/update_write_poll.c				\
 				src/server/write_all_client.c
 
-SRC_CLIENT	=	src/common/sendf/data_sendf.c				\
+SRC_CLIENT	=	src/common/sendf/asendf.c					\
+				src/common/sendf/data_sendf.c				\
 				src/common/sendf/place_char.c				\
 				src/common/sendf/place_int.c				\
 				src/common/sendf/place_str.c				\
@@ -59,6 +60,7 @@ SRC_CLIENT	=	src/common/sendf/data_sendf.c				\
 				src/common/poll_wait.c						\
 				src/common/len_array.c						\
 				src/common/split_cmd.c						\
+				src/common/split_str.c						\
 				src/common/malloc.c							\
 				src/common/str_tolower.c					\
 				src/client/core/channel/add_chan.c			\
@@ -72,11 +74,18 @@ SRC_CLIENT	=	src/common/sendf/data_sendf.c				\
 				src/client/core/cmd/list.c					\
 				src/client/core/cmd/join.c					\
 				src/client/core/cmd/part.c					\
+				src/client/core/cmd/send_file.c				\
 				src/client/core/cmd/users.c					\
 				src/client/core/cmd/names.c					\
 				src/client/core/cmd/msg.c					\
 				src/client/core/cmd/accept_file.c			\
 				src/client/core/cmd/broadcast.c				\
+				src/client/core/cmd/ip_form_sock.c			\
+				src/client/core/send_file/convert_ip.c		\
+				src/client/core/send_file/create_serv.c		\
+				src/client/core/send_file/handle_send_serv.c\
+				src/client/core/send_file/send_file.c		\
+				src/client/core/send_file/swap_endian.c		\
 				src/client/core/sess/init.c					\
 				src/client/core/sess/event.c				\
 				src/client/core/sess/action.c				\
