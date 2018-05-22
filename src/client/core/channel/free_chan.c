@@ -20,3 +20,16 @@ void free_chan(struct sess_s *this)
 	}
 	this->chan = NULL;
 }
+
+void clean_chans(struct sess_s *this)
+{
+	chan_t *chan = this->chan->next;
+	chan_t *next;
+
+	this->cur_chan = this->chan;
+	while (chan) {
+		next = chan->next;
+		this->rmChan(this, chan->name);
+		chan = next;
+	}
+}

@@ -108,6 +108,7 @@ typedef struct sess_s {
 	int (*rmChan)(struct sess_s *, char *);
 	void (*printChan)(struct sess_s *, char *, char *);
 	void (*printfChan)(struct sess_s *, char *, char *, ...);
+	void (*cleanChans)(struct sess_s *);
 	void (*free)(struct sess_s *);
 	void (*_freeChan)(struct sess_s *);
 
@@ -123,6 +124,7 @@ int add_chan(sess_t *, char *);
 int rm_chan(sess_t *, char *);
 void printf_chan(struct sess_s *this, char *name, char *model, ...);
 void print_chan(struct sess_s *this, char *name, char *log);
+void clean_chans(sess_t *);
 void free_chan(struct sess_s *this);
 void free_sess(sess_t *);
 
@@ -225,3 +227,5 @@ void resp_list(ui_t *this, char **list);
 void resp_end_list(ui_t *this, char **list);
 
 char *pretty_size(char *size_c);
+char *get_host(char *line);
+char *get_port(char *line);

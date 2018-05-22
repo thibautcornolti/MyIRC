@@ -16,6 +16,7 @@ sess_t *create_sess()
 	sess->rmChan = &rm_chan;
 	sess->printfChan = &printf_chan;
 	sess->printChan = &print_chan;
+	sess->cleanChans = &clean_chans;
 	sess->_freeChan = &free_chan;
 	sess->free = &free_sess;
 	poll_add(&sess->pl, 0, POLLIN);

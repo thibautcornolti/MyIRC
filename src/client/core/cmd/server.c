@@ -7,21 +7,17 @@
 
 #include "client.h"
 
-static bool cmd_server_connect(serv_t *serv, char *ip, int port)
+static bool cmd_server_connect(serv_t *serv, char *ip, char *port)
 {
-	struct hostent *server = gethostbyname(ip);
+	struct addrinfo *result = NULL;
 	int ret = 1;
 
-	if (server) {
-		memcpy(server->h_addr, &serv->s_in.sin_addr.s_addr,
-			server->h_length);
-//		memset(&serv->s_in, 0, sizeof(serv->s_in));
-		dprintf(2, "IP: %s\n", ip);
-//		inet_pton(AF_INET, ip, &serv->s_in.sin_addr);
-		serv->s_in.sin_family = AF_INET;
-		serv->s_in.sin_port = htons(port);
-		ret = connect(serv->fd, (struct sockaddr *)&serv->s_in,
-			sizeof(serv->s_in));
+	if (getaddrinfo(ip, port, NULL, &result) == 0) {
+		while (result && ret) {
+			ret = connect(
+				serv->fd, result->ai_addr, result->ai_addrlen);
+			result = result->ai_next;
+		}
 	}
 	return (ret == 0);
 }
@@ -39,48 +35,54 @@ static bool cmd_server_init(serv_t *serv)
 	return (res);
 }
 
-static char *get_host(char *line)
+static void cmd_server_prepare(sess_t *sess, char *host, char *port)
 {
-	size_t len = 0;
-
-	for (; line[len] && line[len] != ':'; len++)
-		;
-	return (strndup(line, len));
+	errno = 0;
+	if (sess->serv->connected) {
+		sess->printChan(sess, "master", "Disconnected!");
+		sess->cleanChans(sess);
+		close(sess->serv->fd);
+	}
+	sess->serv->connected = false;
+	sess->serv->host = strdup(host);
+	sess->serv->port = atoi(port);
 }
 
-static int get_port(char *line)
+static void cmd_server_process_post_cmd(sess_t *sess, bool prepare)
 {
-	size_t len = 0;
-	int res = 194;
+	static bool was_connected;
+	serv_t *serv = sess->serv;
 
-	for (; line[len] && line[len] != ':'; len++)
-		;
-	if (line[len] == ':')
-		res = atoi(line + len + 1);
-	return (res);
+	if (prepare)
+		was_connected = serv->connected;
+	else if (was_connected && serv->connected) {
+		serv->commander->push(serv->commander,
+			"USER %s 127.0.0.1 server %s", getlogin(), getlogin());
+		serv->commander->push(
+			serv->commander, "NICK %s", sess->nickname);
+	}
 }
 
-bool cmd_server(sess_t *sess, char *line) //TODO Coding Style
+bool cmd_server(sess_t *sess, char *line)
 {
 	bool res = true;
 	char *host = get_host(line);
-	int port = get_port(line);
+	char *port = get_port(line);
 
-	errno = 0;
-	sess->serv->connected = false;
-	sess->serv->host = strdup(host);
-	sess->serv->port = port;
-	if (!cmd_server_init(sess->serv) || !cmd_server_connect(sess->serv,
-	host, port)) {
+	cmd_server_process_post_cmd(sess, true);
+	cmd_server_prepare(sess, host, port);
+	if (!cmd_server_init(sess->serv) ||
+		!cmd_server_connect(sess->serv, host, port)) {
 		if (errno)
-			sess->chan->logger->log(sess->chan->logger, strerror
-			(errno));
+			sess->printChan(sess, "master", strerror(errno));
 		res = false;
-	} else {
+	}
+	else {
 		sess->serv->connected = true;
-		sess->chan->logger->log(sess->chan->logger, "Connected!");
+		sess->printChan(sess, "master", "Connected!");
 		poll_add(&sess->pl, sess->serv->fd, POLLIN | POLLOUT);
 	}
+	cmd_server_process_post_cmd(sess, false);
 	free(host);
 	return (res);
 }

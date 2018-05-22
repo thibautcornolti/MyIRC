@@ -67,6 +67,7 @@ SRC_CLIENT	=	src/common/sendf/data_sendf.c				\
 				src/client/core/channel/rm_chan.c			\
 				src/client/core/cmd/action.c				\
 				src/client/core/cmd/server.c				\
+				src/client/core/cmd/server_tools.c			\
 				src/client/core/cmd/nick.c					\
 				src/client/core/cmd/list.c					\
 				src/client/core/cmd/join.c					\
