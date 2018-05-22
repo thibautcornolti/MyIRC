@@ -20,6 +20,9 @@ void sig_handler(int sig)
 {
 	ui_t *ui = get_master_ui();
 
-	ui->free(ui);
-	(void) sig;
+	if (sig == SIGWINCH) {
+		endwin();
+		initscr();
+		ui->update(ui);
+	}
 }

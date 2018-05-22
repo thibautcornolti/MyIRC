@@ -25,6 +25,7 @@ static void run() //TODO Coding style
 
 	ui->init(ui);
 	set_master_ui(ui);
+	signal(SIGWINCH, sig_handler);
 	ui->update(ui);
 	while (!ui->hasToQuit) {
 		wait_fd(ui);

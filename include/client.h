@@ -14,6 +14,7 @@
 #include <ncurses.h>
 #include <netdb.h>
 #include <netinet/in.h>
+#include <signal.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
@@ -229,3 +230,4 @@ void resp_end_list(ui_t *this, char **list);
 char *pretty_size(char *size_c);
 char *get_host(char *line);
 char *get_port(char *line);
+void sig_handler(int);
