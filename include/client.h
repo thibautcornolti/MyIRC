@@ -250,6 +250,7 @@ void resp_names(ui_t *ui, char **resp);
 void resp_part(ui_t *this, char **resp);
 void resp_list(ui_t *this, char **list);
 void resp_end_list(ui_t *this, char **list);
+void resp_nick_used(ui_t *this, char **list);
 
 char *pretty_size(char *size_c);
 char *get_host(char *line);

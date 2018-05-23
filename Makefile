@@ -99,6 +99,7 @@ SRC_CLIENT	=	src/common/sendf/asendf.c					\
 				src/client/core/resp/part.c					\
 				src/client/core/resp/pretty_size.c			\
 				src/client/core/resp/privmsg.c				\
+				src/client/core/resp/nick_used.c			\
 				src/client/core/commander/init.c			\
 				src/client/core/commander/commander.c		\
 				src/client/ui/event.c						\
