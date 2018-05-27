@@ -21,9 +21,10 @@ static void recv_file(ui_t *this, char *msg, char *nick)
 	size = pretty_size(msg_split[5]);
 	if (size)
 		this->session->printfChan(this->session, nick,
-			"%s: Send a file \"%s\" "
-			"(size: ~%s)",
-			nick, msg_split[2], size);
+		"%s: Send a file \"%s\" "
+		"(size: ~%s)",
+		nick, msg_split[2], size);
+	init_get_file(this, msg_split, nick);
 	free(size);
 	free_array((void **)msg_split);
 }

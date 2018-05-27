@@ -34,7 +34,7 @@ static bool handle_transfert(sess_t *sess, size_t i, bool state)
 		i + 1, sess->nb_send_serv - i - 1);
 	sess->nb_send_serv -= 1;
 	sess->send_serv = realloc(sess->send_serv,
-	sizeof(send_serv_t) * sess->nb_send_serv);
+	sizeof(send_file_t) * sess->nb_send_serv);
 	return (false);
 }
 
@@ -65,7 +65,7 @@ static bool handle_end_of_read(sess_t *sess, size_t i)
 		read(sess->send_serv[i].client, &rsize, 4);
 		if (fstat(sess->send_serv[i].fd_file, &s) == -1)
 			return (true);
-		if (swap_endian(rsize) == s.st_size)
+		if (swap_endian(rsize) >= s.st_size)
 			return (handle_transfert(sess, i, true));
 	}
 	return (true);

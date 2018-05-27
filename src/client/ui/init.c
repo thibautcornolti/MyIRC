@@ -22,7 +22,7 @@ ui_t *create_ui() // TODO Coding Style
 	ui->getServerEvent = &get_event_serv;
 	ui->processServerEvent = &process_event_serv;
 	ui->sendServerEvent = &send_event_serv;
-	ui->fileEvent = &handle_send_serv;
+	ui->fileEvent = &handle_transfer;
 	ui->framecap = 70000;
 	ui->hasToQuit = false;
 	ui->buffer_size = 1025;

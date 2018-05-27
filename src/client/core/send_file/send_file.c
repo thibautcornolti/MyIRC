@@ -26,7 +26,7 @@ static char *convert_cmd(char *cmd)
 
 static void add_sock_in_serv(sess_t *sess, int fd, int sock, char *filename)
 {
-	sess->send_serv = realloc(sess->send_serv, sizeof(send_serv_t) *
+	sess->send_serv = realloc(sess->send_serv, sizeof(send_file_t) *
 	(sess->nb_send_serv + 1));
 	sess->send_serv[sess->nb_send_serv].serv = sock;
 	sess->send_serv[sess->nb_send_serv].client = 0;

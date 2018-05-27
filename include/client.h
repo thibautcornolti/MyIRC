@@ -108,23 +108,46 @@ typedef struct chan_s {
 ** Send file
 */
 
-typedef struct send_serv_s {
-	int serv;
-	int client;
-	int fd_file;
-	char *file;
-} send_serv_t;
-
 typedef union {
 	uint32_t val;
 	char digit[4];
 } ip_t;
+
+typedef struct send_file_s {
+	int serv;
+	int client;
+	int fd_file;
+	char *file;
+} send_file_t;
+
 
 typedef struct sess_s sess_t;
 
 bool send_file(sess_t *sess, int fd, char *nick, char *filename);
 int create_random_serv(uint16_t *port);
 ip_t convert_ip(int sock);
+
+/*
+** Get file
+*/
+
+typedef struct get_file_s {
+	int state;
+	int serv;
+	int fd_file;
+	char *name;
+	char *nick;
+	char *ip;
+	uint16_t port;
+	size_t size_dl;
+	size_t size_tot;
+} get_file_t;
+
+int create_client(char *serv, uint16_t port);
+void init_get_file(struct ui_s *this, char **line, char *nick);
+void handle_get_file(struct ui_s *this);
+
+void handle_transfer(struct ui_s *this);
 
 typedef struct sess_s {
 	int (*addChan)(struct sess_s *, char *);
@@ -139,8 +162,10 @@ typedef struct sess_s {
 	chan_t *chan;
 	chan_t *cur_chan;
 	poll_t *pl;
-	send_serv_t *send_serv;
+	send_file_t *send_serv;
 	size_t nb_send_serv;
+	get_file_t *get_file;
+	size_t nb_get_file;
 	char *nickname;
 } sess_t;
 

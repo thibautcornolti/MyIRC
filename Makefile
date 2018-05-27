@@ -101,6 +101,10 @@ SRC_CLIENT	=	src/common/sendf/asendf.c					\
 				src/client/core/resp/privmsg.c				\
 				src/client/core/commander/init.c			\
 				src/client/core/commander/commander.c		\
+				src/client/core/get_file/create_client.c	\
+				src/client/core/get_file/handle_get_file.c	\
+				src/client/core/get_file/init_get_file.c	\
+				src/client/core/handle_transfer.c			\
 				src/client/ui/event.c						\
 				src/client/ui/init.c						\
 				src/client/ui/update.c						\
