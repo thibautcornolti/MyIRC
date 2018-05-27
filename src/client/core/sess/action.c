@@ -10,7 +10,8 @@
 
 list_cmd_action_t cmd[] = {{"PRIVMSG", &resp_privmsg}, {"JOIN", &resp_join},
 	{"PART", &resp_part}, {"353", &resp_names}, {"366", &resp_no_action},
-	{"322", &resp_list}, {"323", &resp_end_list}, {NULL, NULL}};
+	{"322", &resp_list}, {"323", &resp_end_list}, {"433", &resp_nick_used},
+	{NULL, NULL}};
 
 bool do_srv(ui_t *ui)
 {
