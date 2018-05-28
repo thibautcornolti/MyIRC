@@ -110,7 +110,7 @@ typedef struct chan_s {
 
 typedef union {
 	uint32_t val;
-	char digit[4];
+	unsigned char digit[4];
 } ip_t;
 
 typedef struct send_file_s {

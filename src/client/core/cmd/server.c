@@ -40,7 +40,6 @@ static void cmd_server_prepare(sess_t *sess, char *host, char *port)
 	errno = 0;
 	if (sess->serv->connected) {
 		sess->printChan(sess, "master", "Disconnected!");
-		sess->cleanChans(sess);
 		close(sess->serv->fd);
 	}
 	sess->serv->connected = false;
@@ -53,9 +52,10 @@ static void cmd_server_process_post_cmd(sess_t *sess, bool prepare)
 	static bool was_connected;
 	serv_t *serv = sess->serv;
 
-	if (prepare)
+	if (prepare) {
 		was_connected = serv->connected;
-	else if (was_connected && serv->connected) {
+		sess->cleanChans(sess);	
+	} else if (was_connected && serv->connected) {
 		serv->commander->push(serv->commander,
 			"USER %s 127.0.0.1 server %s", getlogin(), getlogin());
 		serv->commander->push(
