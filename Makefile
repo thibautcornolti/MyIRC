@@ -28,6 +28,7 @@ SRC_SERVER	=	src/common/sendf/data_sendf.c				\
 				src/server/fnt/privmsg.c					\
 				src/server/fnt/quit.c						\
 				src/server/fnt/user.c						\
+				src/server/fnt/users.c						\
 				src/server/accept_client.c					\
 				src/server/broadcast_channel.c				\
 				src/server/channel.c						\

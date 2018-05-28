@@ -122,5 +122,6 @@ void privmsg_cmd(server_t *server, client_t *cli, cmd_t *cmd);
 void quit_cmd(server_t *server, client_t *cli, cmd_t *cmd);
 void list_cmd(server_t *server, client_t *client, cmd_t *cmd);
 void names_cmd(server_t *server, client_t *client, cmd_t *cmd);
+void users_cmd(server_t *server, client_t *cli, cmd_t *cmd);
 
 #endif /* !PROJECT_SERVER_H */

@@ -17,6 +17,7 @@ static const cmd_list_t list[] = {
 	{"QUIT", 0, &quit_cmd},
 	{"LIST", 1, &list_cmd},
 	{"NAMES", 1, &names_cmd},
+	{"USERS", 1, &users_cmd},
 	{NULL, 0, NULL}
 };
 
