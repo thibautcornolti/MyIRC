@@ -23,6 +23,8 @@ static void accept_file(sess_t *sess, get_file_t *file)
 
 bool cmd_accept_file(sess_t *sess, char *line)
 {
+	if (!strlen(line) && strcmp(sess->cur_chan->name, "master"))
+		line = sess->cur_chan->name;
 	for (size_t i = 0; i < sess->nb_get_file; i++)
 		if (sess->get_file[i].state == 0 &&
 		!strcmp(sess->get_file[i].nick, line)) {
