@@ -7,3 +7,5 @@ cmake-build-*
 *#
 /client
 /server
+vg
+test.txt
