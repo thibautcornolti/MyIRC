@@ -7,7 +7,7 @@
 
 #include "client.h"
 
-logger_t *create_logger()
+logger_t *create_logger(void)
 {
 	logger_t *logger;
 
@@ -18,7 +18,7 @@ logger_t *create_logger()
 	return (logger);
 }
 
-log_t *create_log()
+log_t *create_log(void)
 {
 	log_t *log;
 

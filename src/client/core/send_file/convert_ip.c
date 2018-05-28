@@ -16,7 +16,6 @@ ip_t convert_ip(int sock)
 
 	if (!ip_str)
 		return (ip);
-	dprintf(2, "IP : %s\n", ip_str);
 	ip_split = split_str(ip_str, ".");
 	if (!ip_split || len_array((void **) ip_split) != 4) {
 		free(ip_str);

@@ -49,7 +49,7 @@ typedef struct commander_s {
 	char *cmds[513];
 } commander_t;
 
-commander_t *create_commander();
+commander_t *create_commander(void);
 size_t size_commander(commander_t *);
 bool push_commander(commander_t *, char *, ...);
 char *pop_commander(commander_t *);
@@ -69,7 +69,7 @@ typedef struct logger_s {
 	size_t size;
 } logger_t;
 
-logger_t *create_logger();
+logger_t *create_logger(void);
 void add_logger(logger_t *, log_t);
 void log_logger(logger_t *, char *);
 void free_logger(logger_t *);
@@ -92,7 +92,7 @@ typedef struct serv_s {
 	size_t buffer_size;
 } serv_t;
 
-serv_t *create_serv();
+serv_t *create_serv(void);
 void free_serv(serv_t *);
 
 bool do_srv(struct ui_s *);
@@ -169,7 +169,7 @@ typedef struct sess_s {
 	char *nickname;
 } sess_t;
 
-sess_t *create_sess();
+sess_t *create_sess(void);
 int add_chan(sess_t *, char *);
 int rm_chan(sess_t *, char *);
 void printf_chan(struct sess_s *this, char *name, char *model, ...);
@@ -238,7 +238,7 @@ typedef struct ui_s {
 	size_t buffer_size;
 } ui_t;
 
-ui_t *create_ui();
+ui_t *create_ui(void);
 void init_ui(ui_t *);
 void free_ui(ui_t *);
 void update_ui(ui_t *);

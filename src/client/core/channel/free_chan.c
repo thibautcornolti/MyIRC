@@ -11,6 +11,7 @@ void free_chan(struct sess_s *this)
 {
 	chan_t *chan = this->chan;
 	chan_t *cpy;
+
 	while (chan) {
 		cpy = chan->next;
 		chan->logger->free(chan->logger);

@@ -22,9 +22,8 @@ static void place_uint_in_str(char *str, unsigned long nb, size_t len)
 {
 	size_t i = 1;
 
-	if (nb == 0) {
+	if (nb == 0)
 		str[0] = '0';
-	}
 	while (nb > 0) {
 		str[len - i] = (char) (nb % 10 + '0');
 		nb /= 10;

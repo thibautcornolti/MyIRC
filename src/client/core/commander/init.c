@@ -7,7 +7,7 @@
 
 #include "client.h"
 
-commander_t *create_commander()
+commander_t *create_commander(void)
 {
 	commander_t *commander;
 

@@ -11,6 +11,7 @@
 static void send_list(server_t *server, client_t *client, cmd_t *cmd)
 {
 	char *list = get_user_by_chan(server->clients, client, cmd->args[0]);
+
 	if (!list)
 		return;
 	msg_sendf(&client->to_send, ":%s 353 %s = %s :%s\r\n",

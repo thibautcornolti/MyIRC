@@ -10,7 +10,9 @@
 static void accept_file(sess_t *sess, get_file_t *file)
 {
 	file->serv = create_client(file->ip, file->port);
-	file->fd_file = open(file->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (file->serv != -1)
+		file->fd_file = open(file->name, O_WRONLY | O_CREAT |
+		O_TRUNC, 0644);
 	if (file->serv == -1 || file->fd_file == -1) {
 		sess->printfChan(sess, file->nick, "Transfer failed (%s)",
 		file->name);

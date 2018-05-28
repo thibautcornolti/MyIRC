@@ -72,11 +72,11 @@ char **split_str(char *str, char *delim)
 {
 	size_t size = nb_split(str, delim);
 	char **ret = malloc(sizeof(char *) * (size + 1));
+	size_t i = 0;
 
 	if (!ret)
 		return (NULL);
 	memset(ret, 0, sizeof(char *) * (size + 1));
-	size_t i = 0;
 	while (i < size) {
 		ret[i] = malloc(sizeof(char) * (len_token(str, delim, i) + 1));
 		if (!ret[i])

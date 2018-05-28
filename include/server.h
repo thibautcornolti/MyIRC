@@ -65,7 +65,7 @@ int accept_client(int sock_serv, client_t **cli, poll_t **p);
 
 size_t nb_client(client_t *cli);
 int client_add(client_t **cli, client_t *to_add);
-int client_rm(client_t **cli, client_t *to_rm);
+void client_rm(client_t **cli, client_t *to_rm);
 
 void read_all_cli(server_t *s);
 

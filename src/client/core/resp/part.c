@@ -20,8 +20,7 @@ void resp_part(ui_t *this, char **resp)
 			rm_chan(this->session, resp[2]);
 		this->w_chan->update(this->w_chan);
 		this->w_logs->update(this->w_logs);
-	}
-	else {
+	} else {
 		this->session->printfChan(this->session, resp[2],
 			"%s leave this channel (\"%s\")", nick,
 			(len_array((void **)resp) >= 4) ? resp[3] : "");

@@ -7,7 +7,7 @@
 
 #include "client.h"
 
-sess_t *create_sess()
+sess_t *create_sess(void)
 {
 	sess_t *sess;
 
@@ -35,7 +35,7 @@ void free_sess(sess_t *this)
 	free(this);
 }
 
-serv_t *create_serv()
+serv_t *create_serv(void)
 {
 	serv_t *serv;
 

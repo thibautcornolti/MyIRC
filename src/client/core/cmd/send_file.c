@@ -32,9 +32,7 @@ bool cmd_send_file(sess_t *sess, char *line)
 		if (fd == -1 ||
 			!send_file(sess, fd, cmd[0], cmd_send_fname(cmd[1])))
 			sess->printfChan(sess, "master",
-				"Cannot send file "
-				"\"%s\"",
-				cmd[1]);
+				"Cannot send file \"%s\"", cmd[1]);
 		else
 			ret = true;
 	}

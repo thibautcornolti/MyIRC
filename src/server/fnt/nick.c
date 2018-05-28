@@ -64,6 +64,3 @@ void nick_cmd(server_t *server, client_t *cli, cmd_t *cmd)
 	else
 		change_nick(server, cli, cmd);
 }
-
-//:test!~a@163.5.141.157 NICK :lol
-//:<old_login> NICK :<new_login>

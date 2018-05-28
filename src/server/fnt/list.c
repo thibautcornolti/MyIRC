@@ -24,6 +24,3 @@ void list_cmd(server_t *server, client_t *client, cmd_t *cmd)
 	msg_sendf(&client->to_send, ":%s 323 %s :%s\r\n", "localhost",
 	client->nickname, "End of LIST");
 }
-
-//:irc.knoepflin.tk 353 test = #lol :@Arthur
-//:irc.knoepflin.tk 366 test #lol :End of NAMES list.

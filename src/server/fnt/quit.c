@@ -31,7 +31,6 @@ void quit_cmd(server_t *server, client_t *cli, cmd_t *cmd)
 	free_channel(cli->channel);
 	cli->channel = NULL;
 	close_empty_chan(server);
-
 	if (cli->log_state == 0x11)
 		msg_sendf(&cli->to_send, "ERROR :%s: %s[~%s@localhost] (\"%s\""
 	")\r\n", "Closing Link", cli->nickname, cli->username, (cmd->ac >= 1) ?

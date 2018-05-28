@@ -48,17 +48,17 @@ static void free_client(client_t *cli)
 	cli->buf = NULL;
 }
 
-int client_rm(client_t **cli, client_t *to_rm)
+void client_rm(client_t **cli, client_t *to_rm)
 {
 	client_t *tmp;
 	client_t *cpy = *cli;
 
 	if (!cpy)
-		return (0);
+		return;
 	if (cpy == to_rm) {
 		*cli = cpy->next;
 		free(cpy);
-		return (1);
+		return;
 	}
 	while (cpy->next) {
 		if (cpy->next == to_rm) {
@@ -66,9 +66,8 @@ int client_rm(client_t **cli, client_t *to_rm)
 			free_client(tmp);
 			cpy->next = cpy->next->next;
 			free(tmp);
-			return (1);
+			return;
 		}
 		cpy = cpy->next;
 	}
-	return (0);
 }

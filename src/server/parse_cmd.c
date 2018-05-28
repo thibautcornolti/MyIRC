@@ -19,7 +19,6 @@ cmd_t *parse_cmd(char *str)
 	cmd_t *ret = malloc(sizeof(cmd_t));
 	char **split = split_cmd(str);
 
-	printf("CMD: %s\n", str);
 	if (!ret || !split) {
 		free(ret);
 		free_array((void **) split);

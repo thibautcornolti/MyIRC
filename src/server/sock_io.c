@@ -20,12 +20,7 @@ static char *sock_io_split(char *line)
 		free(line);
 		return (NULL);
 	}
-	int i = 0;
-	while (tmp[i]) {
-		printf("[%d]%s\n", i, tmp[i]);
-		i += 1;
-	}
-	if (tmp && tmp[0] && strlen(tmp[0]) != 0)
+	if (tmp[0] && strlen(tmp[0]) != 0)
 		ret = strdup(tmp[0]);
 	else
 		ret = strdup("");

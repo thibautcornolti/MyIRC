@@ -22,7 +22,7 @@ static void create_ui_2(ui_t *ui)
 	ui->fileEvent = &handle_transfer;
 }
 
-ui_t *create_ui() // TODO Coding Style
+ui_t *create_ui(void)
 {
 	ui_t *ui;
 

@@ -9,10 +9,11 @@
 
 void resp_nick_used(ui_t *this, char **list)
 {
-	(void) list;
 	int len_nick = strlen(this->session->nickname);
 	char *new_nick = safe_realloc(
 		this->session->nickname, len_nick + 1, len_nick + 2);
+
+	(void) list;
 	new_nick[len_nick] = '_';
 	this->session->printfChan(this->session, "master",
 		"Nick %s already used, trying %s", this->session->nickname,

@@ -53,8 +53,7 @@ void broadcast_nick_change(server_t *server, client_t *cli, char *msg)
 		a_cli = server->clients;
 		while (a_cli) {
 			if (a_cli != cli && channel_contain(a_cli->channel,
-							    chan->name) &&
-			    !is_in(ret, a_cli, size))
+			chan->name) && !is_in(ret, a_cli, size))
 				ret = append_cli(ret, a_cli, &size);
 			a_cli = a_cli->next;
 		}

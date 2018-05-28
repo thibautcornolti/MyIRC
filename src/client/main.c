@@ -41,7 +41,7 @@ static void run(ui_t *ui)
 	}
 }
 
-int main()
+int main(void)
 {
 	ui_t *ui = create_ui();
 
