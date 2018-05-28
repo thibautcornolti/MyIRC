@@ -8,6 +8,31 @@
 #include <server.h>
 #include "server.h"
 
+static void first_nick(client_t *cli, cmd_t *cmd)
+{
+	cli->nickname = strdup(cmd->args[0]);
+	if (!cli->nickname)
+		return;
+	cli->log_state |= 0x1;
+	if (cli->log_state == 0x11) {
+		msg_sendf(&cli->to_send, ":%s 001 :Welcome to the Internet "
+		"Relay Network %s!\r\n", "localhost", cli->nickname);
+	}
+}
+
+static void change_nick(server_t *serv, client_t *cli, cmd_t *cmd)
+{
+	char *new_nick = strdup(cmd->args[0]);
+
+	(void) serv;
+	if (!new_nick)
+		return;
+	msg_sendf(&cli->to_send, ":%s!~@localhost NICK :%s\r\n",
+	cli->nickname, new_nick);
+	free(cli->nickname);
+	cli->nickname = new_nick;
+}
+
 static int already_taken(client_t *all_cli, char *nick)
 {
 	while (all_cli) {
@@ -31,12 +56,11 @@ void nick_cmd(server_t *server, client_t *cli, cmd_t *cmd)
 		cmd->args[0], "Nickname is already in use");
 		return;
 	}
-	cli->nickname = strdup(cmd->args[0]);
 	if (!cli->nickname)
-		return;
-	cli->log_state |= 0x1;
-	if (cli->log_state == 0x11) {
-		msg_sendf(&cli->to_send, ":%s 001 :Welcome to the Internet "
-		"Relay Network %s!\r\n", "localhost", cli->nickname);
-	}
+		first_nick(cli, cmd);
+	else
+		change_nick(server, cli, cmd);
 }
+
+//:test!~a@163.5.141.157 NICK :lol
+//:<old_login> NICK :<new_login>
