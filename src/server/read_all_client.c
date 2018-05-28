@@ -59,6 +59,7 @@ static int read_cli(server_t *serv, client_t **tmp_cli)
 		send_disconnect(serv, *tmp_cli);
 		close_empty_chan(serv);
 		client_rm(&serv->clients, *tmp_cli);
+		close((*tmp_cli)->fd);
 		printf("Client disconnected\n");
 		*tmp_cli = tmp;
 		return (0);

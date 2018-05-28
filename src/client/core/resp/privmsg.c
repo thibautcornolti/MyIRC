@@ -33,12 +33,6 @@ static void treat_msg_channel(ui_t *this, char **resp, char *nick)
 {
 	char *tmp;
 
-	int i = 0;
-	dprintf(2, "MSG INCOMMING\n"); // TODO rm debug
-	while (resp[3][i]) {
-		dprintf(2, "CHAR %c %d\n", resp[3][i], resp[3][i]);
-		i++;
-	}
 	if (resp[3][0] == 1 && resp[2][0] != '#') {
 		recv_file(this, resp[3], nick);
 		return;

@@ -21,11 +21,6 @@ bool do_srv(ui_t *ui)
 
 	if (!resp)
 		return (false);
-	dprintf(2, "DO_SRV: %s\n", msg); // TODO rm debug
-	while (resp[i]) {
-		dprintf(2, "[%lu] = %s\n", i, resp[i]);
-		i += 1;
-	}
 	if (len_array((void **)resp) < 3)
 		return (false);
 	str_toupper(resp[1]);

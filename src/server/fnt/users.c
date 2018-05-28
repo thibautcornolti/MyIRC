@@ -25,7 +25,8 @@ static char *get_user_list(server_t *server, client_t *cli)
 	char *ret = NULL;
 
 	while (list) {
-		if (strcmp(list->nickname, cli->nickname) != 0) {
+		if (list->nickname &&
+		strcmp(list->nickname, cli->nickname) != 0) {
 			if (i != 0)
 				ret = append_char(ret, " ");
 			ret = append_char(ret, list->nickname);

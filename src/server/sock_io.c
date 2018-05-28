@@ -56,7 +56,7 @@ char *read_sock(client_t *cli)
 	return (sock_io_split(ret));
 }
 
-int read_cmd(client_t *cli) //TODO Coding style
+int read_cmd(client_t *cli)
 {
 	char tmp;
 

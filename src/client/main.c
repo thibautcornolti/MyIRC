@@ -19,14 +19,8 @@ static void wait_fd(ui_t *ui)
 	poll_wait(ui->session->pl, -1);
 }
 
-static void run() //TODO Coding style
+static void run(ui_t *ui)
 {
-	ui_t *ui = create_ui();
-
-	ui->init(ui);
-	set_master_ui(ui);
-	signal(SIGWINCH, sig_handler);
-	ui->update(ui);
 	while (!ui->hasToQuit) {
 		wait_fd(ui);
 		if (poll_canread(ui->session->pl, 0)) {
@@ -45,26 +39,17 @@ static void run() //TODO Coding style
 		}
 		ui->fileEvent(ui);
 	}
-	ui->free(ui);
 }
 
 int main()
 {
-//	char hostname[500]; //TODO rm debug
-//
-//	gethostname(hostname, 500);
-//	struct hostent *t = gethostbyname(hostname);
-//	int i = 0;
-//	printf("Name: %s\n", t->h_name);
-//	printf("Type: %d\n", t->h_addrtype);
-//	printf("Len: %d\n", t->h_length);
-//	while (t->h_addr_list[i]) {
-//		printf("[%d] : %d.%d.%d.%d\n", i, t->h_addr_list[i][0],
-//		t->h_addr_list[i][1], t->h_addr_list[i][2],
-//		       t->h_addr_list[i][3]);
-//		i ++;
-//	}
-//	return (0);
-	run();
+	ui_t *ui = create_ui();
+
+	ui->init(ui);
+	set_master_ui(ui);
+	signal(SIGWINCH, sig_handler);
+	ui->update(ui);
+	run(ui);
+	ui->free(ui);
 	return (EXIT_SUCCESS);
 }

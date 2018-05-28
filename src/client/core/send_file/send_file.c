@@ -36,7 +36,7 @@ static void add_sock_in_serv(sess_t *sess, int fd, int sock, char *filename)
 	poll_add(&sess->pl, sock, POLLIN);
 }
 
-bool send_file(sess_t *sess, int fd, char *nick, char *filename) //TODO Coding Style
+bool send_file(sess_t *sess, int fd, char *nick, char *filename)
 {
 	ip_t ip;
 	struct stat s;
@@ -48,7 +48,7 @@ bool send_file(sess_t *sess, int fd, char *nick, char *filename) //TODO Coding S
 		return (false);
 	sess->printfChan(sess, "master", "Send \"%s\" to %s", filename, nick);
 	sock = create_random_serv(&port);
-	ip = convert_ip(sock);
+	ip = convert_ip(sess->serv->fd);
 	if (ip.val == 0 || sock == -1)
 		return (false);
 	to_send = convert_cmd(asendf("DCC SEND %s %u %d %u", filename,
