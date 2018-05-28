@@ -23,14 +23,17 @@ static void first_nick(client_t *cli, cmd_t *cmd)
 static void change_nick(server_t *serv, client_t *cli, cmd_t *cmd)
 {
 	char *new_nick = strdup(cmd->args[0]);
+	char *msg = asendf(":%s!~@localhost NICK :%s\r\n",
+			   cli->nickname, cmd->args[0]);
 
 	(void) serv;
-	if (!new_nick)
+	if (!msg || !new_nick)
 		return;
-	msg_sendf(&cli->to_send, ":%s!~@localhost NICK :%s\r\n",
-	cli->nickname, new_nick);
+	broadcast_nick_change(serv, cli, msg);
+	msg_send(&cli->to_send, msg);
 	free(cli->nickname);
 	cli->nickname = new_nick;
+	free(msg);
 }
 
 static int already_taken(client_t *all_cli, char *nick)

@@ -110,6 +110,8 @@ char *get_user_by_chan(client_t *all_cli, client_t *cli, char *chan_name);
 
 int channel_exist(channel_t *channel, char *name);
 
+void broadcast_nick_change(server_t *server, client_t *cli, char *msg);
+
 /*
 ** FNT
 */

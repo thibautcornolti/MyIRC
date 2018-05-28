@@ -5,7 +5,8 @@
 ## main.c
 ##
 
-SRC_SERVER	=	src/common/sendf/data_sendf.c				\
+SRC_SERVER	=	src/common/sendf/asendf.c					\
+				src/common/sendf/data_sendf.c				\
 				src/common/sendf/place_char.c				\
 				src/common/sendf/place_int.c				\
 				src/common/sendf/place_str.c				\
@@ -31,6 +32,7 @@ SRC_SERVER	=	src/common/sendf/data_sendf.c				\
 				src/server/fnt/users.c						\
 				src/server/accept_client.c					\
 				src/server/broadcast_channel.c				\
+				src/server/broadcast_nick_change.c			\
 				src/server/channel.c						\
 				src/server/channel_exist.c					\
 				src/server/client.c							\
