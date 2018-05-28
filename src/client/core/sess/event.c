@@ -33,8 +33,15 @@ void process_event_serv(ui_t *this)
 		serv->buffer_idx = 0;
 		memset(serv->buffer, 0, serv->buffer_size);
 	}
-	if (serv->buffer_last_nb == 0)
+	if (serv->buffer_last_nb == 0) {
 		serv->connected = false;
+		this->session->printChan(
+			this->session, "master", "Connection reset by peer!");
+		serv->commander->push(serv->commander,
+			"USER %s 127.0.0.1 server %s", getlogin(), getlogin());
+		serv->commander->push(
+			serv->commander, "NICK %s", this->session->nickname);
+	}
 	this->w_info->update(this->w_info);
 	this->w_logs->update(this->w_logs);
 	this->w_chan->update(this->w_chan);
