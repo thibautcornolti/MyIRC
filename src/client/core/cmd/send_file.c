@@ -10,7 +10,7 @@
 static char *cmd_send_fname(char *or)
 {
 	int i = -1;
-	int s = 0;
+	int s = -1;
 
 	while (or[++i]) {
 		if (or[i] == '/' && or[i + 1])
