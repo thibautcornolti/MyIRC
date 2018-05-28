@@ -10,21 +10,20 @@
 
 void close_empty_chan(server_t *s)
 {
-	size_t i = 0;
 	channel_t *tmp;
 	channel_t *channel = s->channel;
 
-	while (channel) {
-		if (size_channel(s->clients, channel->name) == 0) {
+	if (channel && size_channel(s->clients, channel->name) == 0) {
+		s->channel = channel->next;
+		free(channel);
+		channel = s->channel;
+	}
+	while (channel && channel->next) {
+		if (size_channel(s->clients, channel->next->name) == 0) {
 			tmp = channel->next;
-			free(channel->name);
-			free(channel);
-			if (i == 0)
-				s->channel = tmp;
-			else
-				i += 1;
-			channel = tmp;
-			i += 1;
+			channel->next = channel->next->next;
+			free(tmp->name);
+			free(tmp);
 		} else
 			channel = channel->next;
 	}
