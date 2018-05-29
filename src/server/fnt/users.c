@@ -42,7 +42,11 @@ void users_cmd(server_t *server, client_t *cli, cmd_t *cmd)
 	char *users = get_user_list(server, cli);
 
 	(void) cmd;
-	msg_sendf(&cli->to_send, ":%s 265 %s :%s\r\n", "localhost",
-	cli->nickname, users);
+	if (users)
+		msg_sendf(&cli->to_send, ":%s 265 %s :@%s %s\r\n", "localhost",
+	cli->nickname, cli->nickname, users);
+	else
+		msg_sendf(&cli->to_send, ":%s 265 %s :@%s\r\n", "localhost",
+	cli->nickname, cli->nickname);
 	free(users);
 }
