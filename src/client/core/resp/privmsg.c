@@ -32,7 +32,7 @@ static void treat_msg_channel(ui_t *this, char **resp, char *nick)
 {
 	char *tmp;
 
-	if (resp[3][0] == 1 && resp[2][0] != '#') {
+	if (resp[3][0] == 1) {
 		recv_file(this, resp[3], nick);
 		return;
 	}
@@ -50,7 +50,7 @@ void resp_privmsg(ui_t *this, char **resp)
 {
 	char *nick;
 
-	if (len_array((void **)resp) < 4)
+	if (len_array((void **) resp) < 4)
 		return;
 	nick = get_nickname(resp[0]);
 	if (nick)
