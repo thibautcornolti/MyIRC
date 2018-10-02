@@ -1,6 +1,6 @@
 # MyIRC
 
-**Subject [here](https://github.com/thibautcornolti/MyIRC/raw/master/Subject.pdf)**
+**Subject [here](https://github.com/thibautcornolti/MyIRC/blob/master/Subject.pdf)**
 
 ![example](https://i.imgur.com/HuTJ3z1.png)
 
